@@ -19,10 +19,11 @@ Three Use Cases that you will implement first:
 Which classes & methods do you need to implement for these use cases?
 (Indicated which team member is responsible for the implemenation)
 1. - Customer/Client - Chris / Laci
-2. - ATM - Muhtasim / Jackson
+2. - ATM - Jackson
+3. - Teller/Account - Muhtasim
 3. - Login - Chris
-4. - Deposit - Muhtasim
-5. - Withdraw - Jackson
+4. - Create/close account - Muhtasim
+5. - Deposit/Withdraw - Jackson
 6. - Transfer - Laci
 
 Don't forget to use Test-Driven Development (TDD)
