@@ -49,6 +49,19 @@ public class BankAccount {
         }
     }
 
+    public void transfer(double amount, BankAccount transferAccount) throws InsufficientFundsException{ //EDIT - throws both types of exceptions based on condition, changed variable name to transferAccount
+        if (isNumberValid(amount) == true && amount < balance){
+            balance -= amount;
+            transferAccount.balance += amount;
+        }
+        else if (amount > balance){
+            throw new InsufficientFundsException("Not enough money!");
+        }
+        else{
+            throw new IllegalArgumentException("You can't deposit an amount with more than 2 decimal places");
+            }
+        }
+
 
     public static boolean isEmailValid(String email){
         if (email.indexOf('@') == -1){
