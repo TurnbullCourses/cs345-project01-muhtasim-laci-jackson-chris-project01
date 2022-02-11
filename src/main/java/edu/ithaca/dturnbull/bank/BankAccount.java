@@ -37,6 +37,8 @@ public class BankAccount {
         }
     }
 
+
+    //init
     /**
      * @post reduces the balance by amount if amount is non-negative and smaller than balance
      */
