@@ -14,14 +14,16 @@ https://drive.google.com/file/d/1M3HjVJGuvxFAXUw-VHSkgHE5aYIsfxNK/view?usp=shari
 Three Use Cases that you will implement first:
 1. - Login
 2. - Deposit/Withdraw/Transfer
-3. - Create/Close Account
+3. - Transfer
 
 Which classes & methods do you need to implement for these use cases?
 (Indicated which team member is responsible for the implemenation)
-1. - Customer/Client - Chris
+1. - Customer/Client - Chris / Laci
 2. - ATM - Muhtasim / Jackson
-3. - BankTeller - Laci
-4. - Methods that are the name of the use cases
+4. - Login - Chris
+5. - Deposit - Muhtasim
+6. - Withdraw - Jackson
+7. - Transfer - Laci
 
 Don't forget to use Test-Driven Development (TDD)
 1. Write Class and Method Function Headers
