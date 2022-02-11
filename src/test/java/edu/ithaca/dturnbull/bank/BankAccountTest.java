@@ -39,4 +39,10 @@ class BankAccountTest {
         assertThrows(IllegalArgumentException.class, ()-> new BankAccount("", 100));
     }
 
+    @Test 
+    void freezeAndUnfreezeTest() {
+
+
+        
+    }
 }
