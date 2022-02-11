@@ -70,6 +70,6 @@ public class BankAccount {
         int decimalIndex = numString.indexOf("."); // Find index of ".""
         int decimalPlaces = numString.length() - decimalIndex - 1; // Subtract total length by the index of ".".
                                                                    // Subtract by an extra 1 to account for index 0
-        return (decimalPlaces > 2); // Check to see if decimal places is less than 2
+        return (decimalPlaces <= 2); // Check to see if decimal places is less than 2
     }
 }

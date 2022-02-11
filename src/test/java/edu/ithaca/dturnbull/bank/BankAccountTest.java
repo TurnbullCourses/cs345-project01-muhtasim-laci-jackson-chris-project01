@@ -37,7 +37,7 @@ class BankAccountTest {
         bankAccount.withdraw(100.000);
         assertEquals(0, bankAccount.getBalance());
     }
-    @Test
+  /*  @Test
     void transferTest() throws InsufficientFundsException{
         BankAccount bankAccountTO = new BankAccount("TO@b.com", 0.00);
         BankAccount bankAccountFROM = new BankAccount("FROM@b.com", 100.00);
@@ -64,7 +64,7 @@ class BankAccountTest {
         bankAccountFROM.transfer(10.010, bankAccountTO);
         assertEquals(20.01, bankAccountTO.getBalance());
         assertEquals(79.99, bankAccountFROM.getBalance());
-    }
+    }*/
 
     @Test
     void depositTest(){
