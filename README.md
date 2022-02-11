@@ -20,10 +20,10 @@ Which classes & methods do you need to implement for these use cases?
 (Indicated which team member is responsible for the implemenation)
 1. - Customer/Client - Chris / Laci
 2. - ATM - Muhtasim / Jackson
-4. - Login - Chris
-5. - Deposit - Muhtasim
-6. - Withdraw - Jackson
-7. - Transfer - Laci
+3. - Login - Chris
+4. - Deposit - Muhtasim
+5. - Withdraw - Jackson
+6. - Transfer - Laci
 
 Don't forget to use Test-Driven Development (TDD)
 1. Write Class and Method Function Headers
