@@ -10,7 +10,7 @@ public class CustomerTest {
         Customer customer = new Customer("USERName1", "PASSwORD!!!!!");
         assertFalse(customer.login("USERName1", "password!!!!!"));
         assertFalse(customer.login("USeRName1", "PASSwORD!!!!!"));
-        assertTrue(customer.login("PASSwORD!!!!!", "PASSwORD!!!!!"));
+        assertTrue(customer.login("USERName1", "PASSwORD!!!!!"));
     }
     
 }

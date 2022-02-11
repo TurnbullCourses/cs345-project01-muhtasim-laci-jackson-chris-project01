@@ -19,7 +19,15 @@ public class Customer {
      * @return boolean indicating if they match or not
      */
     public boolean login(String username, String password){
-        return true;
+        if (this.username.equals(username)){
+            if (this.password.equals(password)){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        return false;
     }
 
     public double getBalance(){
