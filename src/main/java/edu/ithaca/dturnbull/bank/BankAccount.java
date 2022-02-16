@@ -153,6 +153,6 @@ public class BankAccount {
      * @return the sum of the two numbers
      */
     public static double add(double num1, double num2){
-        return 0.0;
+        return num1 + num2;
     }
 }
