@@ -85,4 +85,9 @@ public class BankAccount {
                                                                    // Subtract by an extra 1 to account for index 0
         return (decimalPlaces > 2); // Check to see if decimal places is less than 2
     }
+
+    public static int add(int x, int y){
+        int sum = x + y;
+        return sum;
+    }
 }
