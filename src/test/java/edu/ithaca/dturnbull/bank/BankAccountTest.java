@@ -63,5 +63,13 @@ class BankAccountTest {
         
     }
 
+    @Test
+    void addTest(){
+        
+        assertEquals(4, BankAccount.add(2,2));
+
+        assertEquals(10, BankAccount.add(5,5));
+    }
+
 
 }
