@@ -147,7 +147,7 @@ public class BankAccount {
     }
     
     public static Double addNums(double num1, double num2){
-        
+        return num1+num2;
         
     }
 }
