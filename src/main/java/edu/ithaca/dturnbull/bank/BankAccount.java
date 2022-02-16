@@ -145,9 +145,14 @@ public class BankAccount {
                                                                    // Subtract by an extra 1 to account for index 0
         return (decimalPlaces <= 2); // Check to see if decimal places is less than 2
     }
-    
-    public static Double addNums(double num1, double num2){
-        return num1+num2;
-        
+
+    /**
+     * Adds two numbers together
+     * @param num1 first number
+     * @param num2 second number
+     * @return the sum of the two numbers
+     */
+    public static double add(double num1, double num2){
+        return num1 + num2;
     }
 }

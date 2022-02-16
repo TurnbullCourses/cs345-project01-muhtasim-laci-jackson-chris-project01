@@ -155,11 +155,9 @@ class BankAccountTest {
 
     @Test
     void addTest(){
-        assertEquals(55, BankAccount.addNums(25, 30));
-        assertEquals(75, BankAccount.addNums(55, 20));
-        assertEquals(100.10, BankAccount.addNums(100.00, 0.10));
-        assertEquals(12.5, BankAccount.addNums(6.25,6.25));
-        assertEquals(0, BankAccount.addNums(0, 0));
+        assertEquals(12, BankAccount.add(5.0, 7.0));
+        assertEquals(12.90, BankAccount.add(5.70,7.20));
+
     }
 
 }
