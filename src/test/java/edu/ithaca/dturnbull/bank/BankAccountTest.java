@@ -153,4 +153,11 @@ class BankAccountTest {
 
     }
 
+    @Test
+    void addTest(){
+        assertEquals(12, BankAccount.add(5,7));
+        assertEquals(12.90, BankAccount.add(5.70,7.20));
+
+    }
+
 }
