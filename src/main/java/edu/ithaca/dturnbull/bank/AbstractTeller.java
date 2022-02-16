@@ -10,6 +10,8 @@ public abstract class AbstractTeller {
     
     public abstract boolean login(String username, String password);
 
+    public abstract void createAccount();
+
 
 
     

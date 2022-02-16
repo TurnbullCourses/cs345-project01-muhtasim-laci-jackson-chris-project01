@@ -145,4 +145,10 @@ public class BankAccount {
                                                                    // Subtract by an extra 1 to account for index 0
         return (decimalPlaces <= 2); // Check to see if decimal places is less than 2
     }
+
+    public static Double add(Double num1, Double num2){
+        Double value = num1 + num2;
+        return value;
+
+    }
 }
