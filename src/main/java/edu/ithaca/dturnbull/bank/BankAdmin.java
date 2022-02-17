@@ -7,7 +7,7 @@ public class BankAdmin {
      * @return an array of all the accoutns in the bank
      */
     private Account[] getAllAccounts(){
-        return null;
+        return Bank.getAllAccoutns(); //need to make Bank class
     }
 
     /**
@@ -15,6 +15,11 @@ public class BankAdmin {
      * @return the total money in the bank
      */
     public double sumAllAccounts(){
-        return 0.0;
+        double total = 0.0;
+        Account[] accounts = this.getAllAccounts();
+        for (int i = 0; i < accounts.length; i++){
+            total = total + accounts[i].getBalance();
+        }
+        return total;
     }
 }
