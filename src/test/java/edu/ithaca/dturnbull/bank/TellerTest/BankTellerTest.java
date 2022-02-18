@@ -1,8 +1,10 @@
-package edu.ithaca.dturnbull.bank;
+package edu.ithaca.dturnbull.bank.TellerTest;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
+
+import edu.ithaca.dturnbull.bank.Teller.BankTeller;
 
 public class BankTellerTest {
 

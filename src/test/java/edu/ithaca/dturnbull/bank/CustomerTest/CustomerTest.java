@@ -1,6 +1,9 @@
-package edu.ithaca.dturnbull.bank;
+package edu.ithaca.dturnbull.bank.CustomerTest;
 
 import org.junit.jupiter.api.Test;
+
+import edu.ithaca.dturnbull.bank.Customer.Customer;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CustomerTest {
