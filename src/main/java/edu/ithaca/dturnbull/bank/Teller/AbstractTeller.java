@@ -1,4 +1,6 @@
-package edu.ithaca.dturnbull.bank;
+package edu.ithaca.dturnbull.bank.Teller;
+
+import edu.ithaca.dturnbull.bank.Customer.Customer;
 
 public abstract class AbstractTeller {
     protected String username;

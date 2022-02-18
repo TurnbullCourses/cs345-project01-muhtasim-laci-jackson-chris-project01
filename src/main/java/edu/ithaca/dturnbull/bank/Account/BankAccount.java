@@ -1,4 +1,4 @@
-package edu.ithaca.dturnbull.bank;
+package edu.ithaca.dturnbull.bank.Account;
 
 public class BankAccount {
 
@@ -154,5 +154,10 @@ public class BankAccount {
      */
     public static double add(double num1, double num2){
         return num1 + num2;
+    }
+
+    public static int add(int x, int y){
+        int sum = x + y;
+        return sum;
     }
 }
