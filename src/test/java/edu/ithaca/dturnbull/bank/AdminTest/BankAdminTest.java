@@ -1,4 +1,4 @@
-package edu.ithaca.dturnbull.bank;
+package edu.ithaca.dturnbull.bank.AdminTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 

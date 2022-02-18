@@ -1,6 +1,10 @@
-package edu.ithaca.dturnbull.bank;
+package edu.ithaca.dturnbull.bank.AccountTest;
 
 import org.junit.jupiter.api.Test;
+
+import edu.ithaca.dturnbull.bank.Account.BankAccount;
+import edu.ithaca.dturnbull.bank.Account.InsufficientFundsException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BankAccountTest {
