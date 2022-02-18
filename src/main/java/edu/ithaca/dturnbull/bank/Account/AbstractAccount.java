@@ -1,3 +1,5 @@
+package edu.ithaca.dturnbull.bank.Account;
+
 public abstract class AbstractAccount {
     String email;
     double balance;
