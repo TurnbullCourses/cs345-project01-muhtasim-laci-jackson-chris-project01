@@ -1,4 +1,6 @@
-package edu.ithaca.dturnbull.bank;
+package edu.ithaca.dturnbull.bank.Teller;
+
+import edu.ithaca.dturnbull.bank.Customer.Customer;
 
 import java.util.Scanner;
 import java.util.Random;
