@@ -39,11 +39,7 @@ public abstract class AbstractAccount {
      * @post reduces the balance by @param amount if amount is non-negative and smaller than balance
      * increases the balance of @param transferee 
      */
-<<<<<<< HEAD
-    abstract void transfer(double amoount, AbstractAccount transferee)  throws InsufficientFundsException;
-=======
-    abstract void transfer(double amoount, SavingsAccount transferee)  throws InsufficientFundsException;
->>>>>>> Savings-Account
+    abstract void transfer(double amount, AbstractAccount transferee)  throws InsufficientFundsException;
 
     /**
      * @post checks to see if the @param email is valid
