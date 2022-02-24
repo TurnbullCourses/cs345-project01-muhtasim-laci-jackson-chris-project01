@@ -1,6 +1,7 @@
 package edu.ithaca.dturnbull.bank.Account;
 
 public class SavingsAccount extends AbstractAccount{
+    final double initialwithdrawLimit;
     private double withdrawLimit;
     private double percentInterest;
     /**
@@ -21,6 +22,7 @@ public class SavingsAccount extends AbstractAccount{
         }
         if (isNumberValid(withdrawLimit)){
             this.withdrawLimit = withdrawLimit;
+            this.initialwithdrawLimit = withdrawLimit;
         }
         else{
             throw new IllegalArgumentException("Withdraw Limit: " + withdrawLimit + " is invalid, cannot create account");
@@ -40,7 +42,7 @@ public class SavingsAccount extends AbstractAccount{
                     throw new InsufficientFundsException("Not enough money in the account.");
                 }
             }else{
-                throw new IllegalArgumentException("Amount to withdraw is greater than withdraw limit.")
+                throw new IllegalArgumentException("Amount to withdraw is greater than withdraw limit.");
             }
         }else{
             throw new IllegalArgumentException("Amount to withdraw is invalid.");
@@ -62,7 +64,7 @@ public class SavingsAccount extends AbstractAccount{
                     throw new InsufficientFundsException("Not enough money in the account.");
                 }
             }else{
-                throw new IllegalArgumentException("Amount to withdraw is greater than withdraw limit.")
+                throw new IllegalArgumentException("Amount to withdraw is greater than withdraw limit.");
             }
         }else{
             throw new IllegalArgumentException("Amount to withdraw is invalid.");
@@ -88,5 +90,7 @@ public class SavingsAccount extends AbstractAccount{
     public double getWithdrawLimit(){
         return withdrawLimit;
     }
-
+    public void resetWithdrawLimit(){
+        withdrawLimit = initialwithdrawLimit;
+    }
 }

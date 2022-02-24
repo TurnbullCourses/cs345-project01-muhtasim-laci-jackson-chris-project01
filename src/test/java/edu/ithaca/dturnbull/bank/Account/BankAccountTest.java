@@ -8,7 +8,7 @@ class BankAccountTest {
 
     @Test
     void getBalanceTest() throws InsufficientFundsException {
-        BankAccount bankAccount = new BankAccount("a@b.com", 200);
+        SavingsAccount bankAccount = new SavingsAccount("a@b.com", 200, 200, 10.0);
         assertEquals(200, bankAccount.getBalance(), 0.001);
         bankAccount.withdraw(100);
         assertEquals(100, bankAccount.getBalance(), 0.001);
@@ -16,7 +16,7 @@ class BankAccountTest {
 
     @Test
     void withdrawTest() throws InsufficientFundsException {
-        BankAccount bankAccount = new BankAccount("a@b.com", 200);
+        SavingsAccount bankAccount = new SavingsAccount("a@b.com", 200, 200, 10.0);
         bankAccount.withdraw(100);
         assertEquals(100, bankAccount.getBalance(), 0.001);
 
@@ -40,8 +40,8 @@ class BankAccountTest {
 
     @Test
     void transferTest() throws InsufficientFundsException {
-        BankAccount bankAccount = new BankAccount("a@b.com", 200);
-        BankAccount newAccount = new BankAccount("new@mail.com", 0);
+        SavingsAccount bankAccount = new SavingsAccount("a@b.com", 200, 200, 10.0);
+        SavingsAccount newAccount = new SavingsAccount("new@mail.com", 0, 200, 10.0);
 
         bankAccount.transfer(100, newAccount);
 
@@ -63,7 +63,7 @@ class BankAccountTest {
 
     @Test
     void depositTest() {
-        BankAccount bankAccount = new BankAccount("a@b.com", 0.00);
+        SavingsAccount bankAccount = new SavingsAccount("a@b.com", 0.00, 100, 0.5);
         bankAccount.deposit(100.00);
         assertEquals(100, bankAccount.getBalance());
 
@@ -85,52 +85,52 @@ class BankAccountTest {
 
     @Test
     void isEmailValidTest() {
-        assertTrue(BankAccount.isEmailValid("a@b.com")); // Valid Email Address
-        assertFalse(BankAccount.isEmailValid("")); // Empty String
+        assertTrue(SavingsAccount.isEmailValid("a@b.com")); // Valid Email Address
+        assertFalse(SavingsAccount.isEmailValid("")); // Empty String
 
         // @ symbol
-        assertFalse(BankAccount.isEmailValid("ab@c@mail.com"));
-        assertFalse(BankAccount.isEmailValid("abcmail.com"));
-        assertFalse(BankAccount.isEmailValid("abc@"));
-        assertFalse(BankAccount.isEmailValid("@mail.com"));
+        assertFalse(SavingsAccount.isEmailValid("ab@c@mail.com"));
+        assertFalse(SavingsAccount.isEmailValid("abcmail.com"));
+        assertFalse(SavingsAccount.isEmailValid("abc@"));
+        assertFalse(SavingsAccount.isEmailValid("@mail.com"));
 
         // Special Characters
-        assertFalse(BankAccount.isEmailValid("abc-@mail.com")); // No special characters are permitted just before the @
+        assertFalse(SavingsAccount.isEmailValid("abc-@mail.com")); // No special characters are permitted just before the @
                                                                 // symbol
-        assertFalse(BankAccount.isEmailValid("abc#def@mail.com")); // The character # is not permitted in a valid email
+        assertFalse(SavingsAccount.isEmailValid("abc#def@mail.com")); // The character # is not permitted in a valid email
                                                                    // address before the @
-        assertFalse(BankAccount.isEmailValid("abc.def@mail'archive.com")); // The character ' is not permitted in a
+        assertFalse(SavingsAccount.isEmailValid("abc.def@mail'archive.com")); // The character ' is not permitted in a
                                                                            // valid email address after the @
 
         // Domain Suffix
-        assertFalse(BankAccount.isEmailValid("abcd@mail.c")); // There must be two characters in the suffix of the
+        assertFalse(SavingsAccount.isEmailValid("abcd@mail.c")); // There must be two characters in the suffix of the
                                                               // domain
-        assertTrue(BankAccount.isEmailValid("abcd@mail.cc")); // Valid Email Address
+        assertTrue(SavingsAccount.isEmailValid("abcd@mail.cc")); // Valid Email Address
 
-        assertTrue(BankAccount.isEmailValid("abc_def@mail.com")); // Valid Email Address
-        assertFalse(BankAccount.isEmailValid(".abcd@mail.com")); // Cannot start with a special character
+        assertTrue(SavingsAccount.isEmailValid("abc_def@mail.com")); // Valid Email Address
+        assertFalse(SavingsAccount.isEmailValid(".abcd@mail.com")); // Cannot start with a special character
 
     }
 
     @Test
     void constructorTest() {
-        BankAccount bankAccount = new BankAccount("a@b.com", 200);
+        SavingsAccount bankAccount = new SavingsAccount("a@b.com", 200,200,10);
 
         assertEquals("a@b.com", bankAccount.getEmail());
         assertEquals(200, bankAccount.getBalance(), 0.001);
 
         // check for exception thrown correctly
-        assertThrows(IllegalArgumentException.class, () -> new BankAccount("", 100));
-        assertThrows(IllegalArgumentException.class, () -> new BankAccount("a@b.com", 100.001));
-        assertThrows(IllegalArgumentException.class, () -> new BankAccount("a@b.com", 100.999));
-        assertThrows(IllegalArgumentException.class, () -> new BankAccount("a@b.com", -100.00));
+        assertThrows(IllegalArgumentException.class, () -> new SavingsAccount("", 100,200,10));
+        assertThrows(IllegalArgumentException.class, () -> new SavingsAccount("a@b.com", 100.001,200,10));
+        assertThrows(IllegalArgumentException.class, () -> new SavingsAccount("a@b.com", 100.999,200,10));
+        assertThrows(IllegalArgumentException.class, () -> new SavingsAccount("a@b.com", -100.00,200,10));
 
         // Hanging zeros are not acounted for
-        BankAccount testAccoount1 = new BankAccount("a@b.com", 200.010);
+        SavingsAccount testAccoount1 = new SavingsAccount("a@b.com", 200.010,200,10);
         assertEquals("a@b.com", testAccoount1.getEmail());
         assertEquals(200.01, testAccoount1.getBalance(), 0.001);
 
-        BankAccount testAccoount2 = new BankAccount("a@b.com", 200.990);
+        SavingsAccount testAccoount2 = new SavingsAccount("a@b.com", 200.990,200,10);
         assertEquals("a@b.com", testAccoount2.getEmail());
         assertEquals(200.99, testAccoount2.getBalance(), 0.001);
     }
@@ -138,27 +138,14 @@ class BankAccountTest {
     @Test
     void isNumberValidTest() {
         // checks to see if a double has two decimals or less
-        assertTrue(BankAccount.isNumberValid(100));
-        assertTrue(BankAccount.isNumberValid(100.1));
-        assertTrue(BankAccount.isNumberValid(100.11));
-        assertFalse(BankAccount.isNumberValid(100.111));
+        assertTrue(SavingsAccount.isNumberValid(100));
+        assertTrue(SavingsAccount.isNumberValid(100.1));
+        assertTrue(SavingsAccount.isNumberValid(100.11));
+        assertFalse(SavingsAccount.isNumberValid(100.111));
 
         // amount is a positive number
-        assertTrue(BankAccount.isNumberValid(10));
-        assertFalse(BankAccount.isNumberValid(-10));
-        assertFalse(BankAccount.isNumberValid(-100));
+        assertTrue(SavingsAccount.isNumberValid(10));
+        assertFalse(SavingsAccount.isNumberValid(-10));
+        assertFalse(SavingsAccount.isNumberValid(-100));
     }
-
-    @Test
-    void freezeAndUnfreezeTest() {
-
-    }
-
-    @Test
-    void addTest(){
-        assertEquals(12, BankAccount.add(5.0, 7.0));
-        assertEquals(12.90, BankAccount.add(5.70,7.20));
-
-    }
-
 }
