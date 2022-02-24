@@ -1,3 +1,5 @@
+package edu.ithaca.dturnbull.bank.Account;
+
 public abstract class AbstractAccount {
     String email;
     double balance;
@@ -37,7 +39,7 @@ public abstract class AbstractAccount {
      * @post reduces the balance by @param amount if amount is non-negative and smaller than balance
      * increases the balance of @param transferee 
      */
-    abstract void transfer(double amoount, BankAccount transferee)  throws InsufficientFundsException;
+    abstract void transfer(double amoount, AbstractAccount transferee)  throws InsufficientFundsException;
 
     /**
      * @post checks to see if the @param email is valid
@@ -46,7 +48,7 @@ public abstract class AbstractAccount {
         Boolean valid = true;
         String prefix = email.split("@")[0].toString();
 
-        if (prefix == "") {
+        if (prefix.equals("")) {
             return false;
         }
 
@@ -85,7 +87,7 @@ public abstract class AbstractAccount {
             return false;
         }
 
-        if (domain == "") {
+        if (domain.equals("")) {
             return false;
         }
         
