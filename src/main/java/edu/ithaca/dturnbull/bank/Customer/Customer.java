@@ -5,11 +5,13 @@ public class Customer {
     private String username;
     private String password;
     private double balance;
+    private int customerId;
 
-    public Customer(String username, String password){
+    public Customer(String username, String password, int customerId){
         this.username = username;
         this.password = password;
         this.balance = 0.0;
+        this.customerId = customerId;
     }
 
     /**
