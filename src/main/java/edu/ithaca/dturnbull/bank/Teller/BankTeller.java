@@ -1,9 +1,5 @@
-package edu.ithaca.dturnbull.bank;
+package edu.ithaca.dturnbull.bank.Teller;
 
-<<<<<<< HEAD
-import edu.ithaca.dturnbull.bank.Customer.Customer;
-=======
->>>>>>> main
 
 public class BankTeller extends AbstractTeller {
 
@@ -28,11 +24,6 @@ public class BankTeller extends AbstractTeller {
     @Override
     public void createAccount(){
         
-<<<<<<< HEAD
-
-        
-=======
->>>>>>> main
     }
     
 }
