@@ -1,14 +1,15 @@
 package edu.ithaca.dturnbull.bank.Teller;
 
-
+import edu.ithaca.dturnbull.bank.Account.AbstractAccount;
+import edu.ithaca.dturnbull.bank.Customer.Customer;
 
 public class BankTeller extends AbstractTeller {
     protected String username;
     protected String password;
     protected boolean confirmed;
     protected Customer currentCustomer;
-    protected Account checkingsAccount;
-    protected Account savingsAccount;
+    protected AbstractAccount checkingsAccount;
+    protected AbstractAccount savingsAccount;
 
 
     
