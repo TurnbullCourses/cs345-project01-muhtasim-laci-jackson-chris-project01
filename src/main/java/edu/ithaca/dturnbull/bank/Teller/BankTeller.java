@@ -1,30 +1,39 @@
 package edu.ithaca.dturnbull.bank.Teller;
 
-import java.util.Date;
+import edu.ithaca.dturnbull.bank.Account.AbstractAccount;
+import edu.ithaca.dturnbull.bank.Customer.Customer;
 
 public class BankTeller extends AbstractTeller {
+    protected String username;
+    protected String password;
+    protected boolean confirmed;
+    protected Customer currentCustomer;
+    protected AbstractAccount checkingsAccount;
+    protected AbstractAccount savingsAccount;
+
 
     
     public BankTeller(){
+        confirmed = false;
 
-    }
+    }   
 
-    @Override
-    public boolean login(String username, String password){
-        if (this.username.equals(username)){
-            if (this.password.equals(password)){
-                return true;
-            }
-            else{
-                return false;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public void createAccount(){
+    public boolean createAccount(){
         
+        
+
+
+
+        return false;
+        
+        
+
     }
+
+
+
+     
+
+
     
 }

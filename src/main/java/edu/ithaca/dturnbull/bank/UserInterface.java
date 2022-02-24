@@ -2,6 +2,9 @@ package edu.ithaca.dturnbull.bank;
 
 import java.util.Scanner;
 
+import edu.ithaca.dturnbull.bank.Account.BankAccount;
+import edu.ithaca.dturnbull.bank.Customer.Customer;
+
 public class UserInterface {
 
     public static void main(String[] args) {
