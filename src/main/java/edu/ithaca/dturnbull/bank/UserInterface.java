@@ -2,14 +2,12 @@ package edu.ithaca.dturnbull.bank;
 
 import java.util.Scanner;
 
-import edu.ithaca.dturnbull.bank.Account.BankAccount;
-import edu.ithaca.dturnbull.bank.Customer.Customer;
 
 public class UserInterface {
 
     public static void main(String[] args) {
         //in the future teller will create the accout for the customer instead of just having accounts built in
-        Customer customer1 = new Customer("name1", "password1");
+        Customer customer1 = new Customer("name1", "password1" );
         boolean exit = false;
         Scanner reader = new Scanner(System.in);
         int in = -1;
