@@ -16,7 +16,7 @@ class BankAccountTest {
 
     @Test
     void withdrawTest() throws InsufficientFundsException {
-        SavingsAccount bankAccount = new SavingsAccount("a@b.com", 200, 200, 10.0);
+        SavingsAccount bankAccount = new SavingsAccount("a@b.com", 200, 300, 10.0);
         bankAccount.withdraw(100);
         assertEquals(100, bankAccount.getBalance(), 0.001);
 
@@ -40,7 +40,7 @@ class BankAccountTest {
 
     @Test
     void transferTest() throws InsufficientFundsException {
-        SavingsAccount bankAccount = new SavingsAccount("a@b.com", 200, 200, 10.0);
+        SavingsAccount bankAccount = new SavingsAccount("a@b.com", 200, 500, 10.0);
         SavingsAccount newAccount = new SavingsAccount("new@mail.com", 0, 200, 10.0);
 
         bankAccount.transfer(100, newAccount);
