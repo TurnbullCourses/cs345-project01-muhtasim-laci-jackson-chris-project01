@@ -7,13 +7,7 @@ public class SavingsAccount extends AbstractAccount{
     /**
      * @throws IllegalArgumentException if email is invalid
      */
-    public SavingsAccount(String email, double startingBalance, double withdrawLimit, double percentInterest){
-        if (isEmailValid(email)){
-            this.email = email;
-        }
-        else {
-            throw new IllegalArgumentException("Email address: " + email + " is invalid, cannot create account");
-        }
+    public SavingsAccount(double startingBalance, double withdrawLimit, double percentInterest){
         if(isNumberValid(startingBalance)){
             this.balance = startingBalance;
         }
@@ -41,6 +35,7 @@ public class SavingsAccount extends AbstractAccount{
         if (isNumberValid(amount)) { 
             if (amount <= remainingWithdraw){    
                 if (amount <= balance){
+                    remainingWithdraw-=amount;
                     balance -= amount;
                     balance = Math.round(balance * 100.0) / 100.0; // Multiply by 100 and round to cut off all decimals past the 
                 }else{                                             // hundreths place. Divide by 100 to make sure the number has two decimasl again                       
@@ -60,8 +55,9 @@ public class SavingsAccount extends AbstractAccount{
      */
     public void transfer(double amount, AbstractAccount transferee) throws InsufficientFundsException {
         if (isNumberValid(amount)) { 
-            if (amount <= remainingWithdraw){    
+            if (amount < remainingWithdraw){    
                 if (amount <= balance){
+                    remainingWithdraw-=amount;
                     balance -= amount;
                     balance = Math.round(balance * 100.0) / 100.0;// Multiply by 100 and round to cut off all decimals past the
                     transferee.deposit(amount);                   // hundreths place. Divide by 100 to make sure the number has two decimasl again      
@@ -79,23 +75,25 @@ public class SavingsAccount extends AbstractAccount{
     /**
      * @post changes the balance based on the interest and balance of the account
      */
-    public double newBalance(){
+    public void addInterest(){
         double interest = calculateInterest();
-        balance +=interest;
-        balance = Math.round(balance * 100.0) / 100.0; // Multiply by 100 and round to cut off all decimals past the
-        return balance;                                // hundreths place. Divide by 100 to make sure the number has two decimasl again 
-    }
+        this.deposit(interest);
+    }          
+    
 
     public double calculateInterest(){
         double interest = balance * percentInterest/100;
         interest = Math.round(interest * 100.0) / 100.0; // Multiply by 100 and round to cut off all decimals past the
         return interest;                                // hundreths place. Divide by 100 to make sure the number has two decimasl again 
     }
+    public double getInterest(){
+        return percentInterest;
+    }
     
     public double getRemainingWithdraw(){
         return remainingWithdraw;
     }
     public void resetWithdrawLimit(){
-        withdrawLimit = initialwithdrawLimit;
+        remainingWithdraw = initialwithdrawLimit;
     }
 }
