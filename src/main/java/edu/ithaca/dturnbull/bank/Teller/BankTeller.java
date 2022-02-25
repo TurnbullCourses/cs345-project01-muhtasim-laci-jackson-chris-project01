@@ -3,6 +3,8 @@ package edu.ithaca.dturnbull.bank.Teller;
 import edu.ithaca.dturnbull.bank.Customer.Customer;
 
 public class BankTeller extends AbstractTeller {
+    private int customerId;
+    private String password;
 
 
     
