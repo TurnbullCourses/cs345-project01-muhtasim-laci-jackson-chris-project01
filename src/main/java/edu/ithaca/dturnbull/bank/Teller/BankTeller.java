@@ -3,12 +3,14 @@ package edu.ithaca.dturnbull.bank.Teller;
 import edu.ithaca.dturnbull.bank.Customer.Customer;
 
 public class BankTeller extends AbstractTeller {
-    private int customerId;
+    private int id;
     private String password;
 
 
     
-    public BankTeller(){
+    public BankTeller(int id, String password){
+        this.id = id;
+        this.password = password;
 
     }
 
@@ -35,6 +37,14 @@ public class BankTeller extends AbstractTeller {
         createAccount(customer, accountType);
 
         return customer;
+    }
+
+    public int getId(){
+        return id;
+    }
+
+    public String getPassword(){
+        return password;
     }
     
 }
