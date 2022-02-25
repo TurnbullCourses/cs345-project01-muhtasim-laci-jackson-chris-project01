@@ -16,7 +16,7 @@ class SavingsAccountTest {
 
     @Test
     void withdrawTest() throws InsufficientFundsException {
-        SavingsAccount bankAccount = new SavingsAccount(200, 300, 10.0);
+        SavingsAccount bankAccount = new SavingsAccount(200, 500, 10.0);
         bankAccount.withdraw(100);
         assertEquals(100, bankAccount.getBalance(), 0.001);
 
@@ -78,7 +78,7 @@ class SavingsAccountTest {
 
     @Test
     void transferTest() throws InsufficientFundsException {
-        SavingsAccount bankAccount = new SavingsAccount( 200, 500, 10.0);
+        SavingsAccount bankAccount = new SavingsAccount( 200, 600, 10.0);
         SavingsAccount newAccount = new SavingsAccount(0, 200, 10.0);
 
         bankAccount.transfer(100, newAccount);
@@ -144,7 +144,20 @@ class SavingsAccountTest {
         
         assertEquals(200.99, testAccoount2.getBalance(), 0.001);
     }
-
+    @Test
+    void transactionHistoryTest() throws InsufficientFundsException{
+        SavingsAccount testAccoount = new SavingsAccount(200,1000,10);
+        SavingsAccount testAccount2 = new SavingsAccount(0,1000,10);
+        testAccoount.deposit(100);
+        assertEquals("Deposited 100.0\n", testAccoount.historyToString());
+        testAccoount.deposit(100);
+        assertEquals("Deposited 100.0\nDeposited 100.0\n", testAccoount.historyToString());
+        testAccoount.withdraw(100);
+        assertEquals("Deposited 100.0\nDeposited 100.0\nWithdrew 100.0\n", testAccoount.historyToString());
+        testAccoount.transfer(100, testAccount2);
+        assertEquals("Deposited 100.0\nDeposited 100.0\nWithdrew 100.0\nWithdrew 100.0\n", testAccoount.historyToString());
+        assertEquals("Deposited 100.0\n", testAccount2.historyToString());
+    }
     @Test
     void isNumberValidTest() {
         // checks to see if a double has two decimals or less

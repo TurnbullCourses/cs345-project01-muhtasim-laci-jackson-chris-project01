@@ -1,5 +1,7 @@
 package edu.ithaca.dturnbull.bank.Account;
 
+import java.util.ArrayList;
+
 public class SavingsAccount extends AbstractAccount{
     final double initialwithdrawLimit;
     private double remainingWithdraw;
@@ -26,6 +28,7 @@ public class SavingsAccount extends AbstractAccount{
         }else{
             throw new IllegalArgumentException("Interest: " + percentInterest + " is invalid, cannot create account");
         }
+        this.history = new ArrayList<String>();
     }
 
     /**
@@ -38,7 +41,8 @@ public class SavingsAccount extends AbstractAccount{
                     remainingWithdraw-=amount;
                     balance -= amount;
                     balance = Math.round(balance * 100.0) / 100.0; // Multiply by 100 and round to cut off all decimals past the 
-                }else{                                             // hundreths place. Divide by 100 to make sure the number has two decimasl again                       
+                    appendTransaction(amount, "withdraw");         // hundreths place. Divide by 100 to make sure the number has two decimasl again                       
+                }else{                                             
                     throw new InsufficientFundsException("Not enough money in the account.");
                 }
             }else{
@@ -55,12 +59,10 @@ public class SavingsAccount extends AbstractAccount{
      */
     public void transfer(double amount, AbstractAccount transferee) throws InsufficientFundsException {
         if (isNumberValid(amount)) { 
-            if (amount < remainingWithdraw){    
+            if (amount <= remainingWithdraw){    
                 if (amount <= balance){
-                    remainingWithdraw-=amount;
-                    balance -= amount;
-                    balance = Math.round(balance * 100.0) / 100.0;// Multiply by 100 and round to cut off all decimals past the
-                    transferee.deposit(amount);                   // hundreths place. Divide by 100 to make sure the number has two decimasl again      
+                    withdraw(amount);
+                    transferee.deposit(amount);                       
                 }else{                                                              
                     throw new InsufficientFundsException("Not enough money in the account.");
                 }
