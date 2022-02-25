@@ -24,6 +24,18 @@ public class Bank {
         nextId = 0;
     }
 
+    public Customer customerLogIn(int id, String password){
+        return null;
+    }
+
+    public AbstractTeller tellerLogIn(int id, String password){
+        return null;
+    }
+
+    public BankAdmin adminLogIn(int id, String password){
+        return null;
+    }
+
     public void addAccount(AbstractAccount account){
         accounts.add(account);
     }

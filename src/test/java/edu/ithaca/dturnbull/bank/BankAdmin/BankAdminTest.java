@@ -5,25 +5,31 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import edu.ithaca.dturnbull.bank.Bank.Bank;
+import edu.ithaca.dturnbull.bank.Customer.Customer;
+import edu.ithaca.dturnbull.bank.Teller.AbstractTeller;
 import edu.ithaca.dturnbull.bank.Teller.BankTeller;
 
 public class BankAdminTest {
 
     @Test
-    void sumAllAccountsTest(){ //cannot test yet since other required classes do not exist
+    void loginTest(){
         Bank bank = new Bank();
-        BankAdmin admin = new BankAdmin(0);
-        BankTeller teller = new BankTeller();
-        teller.createAccount();
-        assertEquals(0.0, admin.sumAllAccounts()); //equivalence case - make sure amount is zero
-        //deposit money
-        
-        //make sure correct amount
-        //make another accoutn and deposit money
-        //make sure correct amount in bank
-        
-        
-        
+
+        Customer customer = new Customer(0, "password");
+        bank.addCustomer(customer);
+        Customer customerTest = bank.customerLogIn(0, "password");
+        assertEquals(customer, customerTest);
+
+        AbstractTeller teller = new BankTeller(0, "password");
+        bank.addTeller(teller);
+        AbstractTeller tellerTest = bank.tellerLogIn(0, "password");
+        assertEquals(teller, tellerTest);
+
+        BankAdmin admin = new BankAdmin(0, "password");
+        bank.addAdmin(admin);
+        BankAdmin adminTest = bank.adminLogIn(0, "password");
+        assertEquals(admin, adminTest);
+
     }
     
 }
