@@ -1,8 +1,11 @@
 package edu.ithaca.dturnbull.bank.Account;
 
+import java.util.List;
+
 public abstract class AbstractAccount {
     String email;
     double balance;
+    List<String> history;
 
     /**
     * @post @return balance
@@ -25,6 +28,7 @@ public abstract class AbstractAccount {
         if (isNumberValid(amount)) {
             balance += amount;
             balance = Math.round(balance * 100.0) / 100.0;
+            appendTransaction(amount, "deposit");
         } else {
             throw new IllegalArgumentException("Amount to deposit is invalid");
         }
@@ -44,66 +48,20 @@ public abstract class AbstractAccount {
     /**
      * @post checks to see if the @param email is valid
      */
-    public static boolean isEmailValid(String email){
-        Boolean valid = true;
-        String prefix = email.split("@")[0].toString();
-
-        if (prefix.equals("")) {
-            return false;
-        }
-
-        if (prefix.startsWith(".") || prefix.startsWith("!") || prefix.startsWith("#") || prefix.startsWith("'")) {
-            return false;
-        }
-
-        if (prefix.contains("@")) {
-            return false;
-        }
-
-        if (prefix.endsWith("-")) {
-            return false;
-        }        
-
-        if (prefix.contains("#")) {
-            return false;
-        }
+    public void appendTransaction(double amount, String action){
+        this.history.add(toString(amount, action))
+    }
     
-        if (email.indexOf('@') == -1){
-            return false;
-        } 
-
-        if (email.endsWith("@")) {
-            return false;
+    public String toString(double amount, String action){
+        if (action.equals("deposit")){
+            return "Deposited " + amount; 
+        }else if(action.equals("withdraw")){
+            return "Withdrew " + amount;
         }
-
-        //check domain
-        String domain = email.split("@")[1].toString();
-
-        if (!domain.contains(".")) {
-            return false;
-        }
-
-        if (domain.contains("@")) {
-            return false;
-        }
-
-        if (domain.equals("")) {
-            return false;
-        }
-        
-        String domainLastPortion = domain.split("\\.")[1].toString();
-        if (domain.contains("#") || domain.contains("'")) {
-            return false;
-        }
-
-        if (domainLastPortion.length() < 2) {
-            return false;
-        }
-
-        return valid;
+        return action + amount;
     }
 
-      /**
+     /**
      * @post checks to see if the @param num is valid
      */
     public static boolean isNumberValid(double num) {
