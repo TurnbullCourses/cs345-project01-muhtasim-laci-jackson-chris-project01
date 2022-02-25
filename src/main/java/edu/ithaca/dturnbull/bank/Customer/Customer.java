@@ -1,39 +1,38 @@
 package edu.ithaca.dturnbull.bank.Customer;
 
-public class Customer {
+import edu.ithaca.dturnbull.bank.Account.AbstractAccount;
 
-    private String username;
+public class Customer {
     private String password;
     private double balance;
     private int customerId;
+    private AbstractAccount savingsAccount;
+    private AbstractAccount checkingAccount;
 
-    public Customer(String username, String password, int customerId){
-        this.username = username;
+    public Customer(int customerId, String password){
+        this.customerId = customerId;
         this.password = password;
         this.balance = 0.0;
-        this.customerId = customerId;
-    }
+        savingsAccount = null;
+        checkingAccount = null;
 
-    /**
-     * Method to login to a particular customer's information
-     * @param username - the username to the customer
-     * @param password password to the customer
-     * @return boolean indicating if they match or not
-     */
-    public boolean login(String username, String password){
-        if (this.username.equals(username)){
-            if (this.password.equals(password)){
-                return true;
-            }
-            else{
-                return false;
-            }
-        }
-        return false;
     }
 
     public double getBalance(){
         return balance;
+    }
+
+    public int getid(){
+        return customerId;
+    }
+
+    public void setCheckingsAccount(CheckingAccount checkingAccount){
+        this.checkingAccount = checkingAccount;
+    }
+
+    public void setSavingsAccount(SavingsAccount savingsAccount){
+        this.savingsAccount = savingsAccount;
+        
     }
     
 }
