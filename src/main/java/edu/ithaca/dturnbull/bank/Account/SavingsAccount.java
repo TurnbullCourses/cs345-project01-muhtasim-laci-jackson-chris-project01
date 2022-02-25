@@ -2,7 +2,7 @@ package edu.ithaca.dturnbull.bank.Account;
 
 public class SavingsAccount extends AbstractAccount{
     final double initialwithdrawLimit;
-    private double withdrawLimit;
+    private double remainingWithdraw;
     private double percentInterest;
     /**
      * @throws IllegalArgumentException if email is invalid
@@ -21,7 +21,7 @@ public class SavingsAccount extends AbstractAccount{
             throw new IllegalArgumentException("Starting Balance: " + startingBalance + " is invalid, cannot create account");
         }
         if (isNumberValid(withdrawLimit)){
-            this.withdrawLimit = withdrawLimit;
+            this.remainingWithdraw = withdrawLimit;
             this.initialwithdrawLimit = withdrawLimit;
         }
         else{
@@ -39,7 +39,7 @@ public class SavingsAccount extends AbstractAccount{
      */
     public void withdraw (double amount) throws InsufficientFundsException{
         if (isNumberValid(amount)) { 
-            if (amount <= withdrawLimit){    
+            if (amount <= remainingWithdraw){    
                 if (amount <= balance){
                     balance -= amount;
                     balance = Math.round(balance * 100.0) / 100.0; // Multiply by 100 and round to cut off all decimals past the 
@@ -60,7 +60,7 @@ public class SavingsAccount extends AbstractAccount{
      */
     public void transfer(double amount, AbstractAccount transferee) throws InsufficientFundsException {
         if (isNumberValid(amount)) { 
-            if (amount <= withdrawLimit){    
+            if (amount <= remainingWithdraw){    
                 if (amount <= balance){
                     balance -= amount;
                     balance = Math.round(balance * 100.0) / 100.0;// Multiply by 100 and round to cut off all decimals past the
@@ -92,8 +92,8 @@ public class SavingsAccount extends AbstractAccount{
         return interest;                                // hundreths place. Divide by 100 to make sure the number has two decimasl again 
     }
     
-    public double getWithdrawLimit(){
-        return withdrawLimit;
+    public double getRemainingWithdraw(){
+        return remainingWithdraw;
     }
     public void resetWithdrawLimit(){
         withdrawLimit = initialwithdrawLimit;

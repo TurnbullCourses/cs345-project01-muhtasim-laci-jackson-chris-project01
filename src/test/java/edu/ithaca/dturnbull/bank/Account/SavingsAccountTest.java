@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BankAccountTest {
+class SavingsAccountTest {
 
     @Test
     void getBalanceTest() throws InsufficientFundsException {
@@ -36,6 +36,29 @@ class BankAccountTest {
         // Hanging zeros are not accounted for
         bankAccount.withdraw(100.000);
         assertEquals(0, bankAccount.getBalance());
+    }
+
+    @Test
+    void withdrawLimitTest() throws InsufficientFundsException {
+        SavingsAccount bankAccount = new SavingsAccount("a@b.com", 500, 300, 10.0);
+        bankAccount.withdraw(300);
+        assertEquals(200, bankAccount.getBalance(), 0.001);
+
+        // Overdrawn
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(300));
+
+        // Negative number withdrawn
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(-100));
+
+        // Too many decimal places
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(100.999));
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(100.001));
+
+        // Balance does not change when an excepetion is thrown
+        assertEquals(200, bankAccount.getBalance());
+
+        // Hanging zeros are not accounted for
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(200));
     }
 
     @Test
@@ -104,7 +127,7 @@ class BankAccountTest {
 
         // Domain Suffix
         assertFalse(SavingsAccount.isEmailValid("abcd@mail.c")); // There must be two characters in the suffix of the
-                                                              // domain
+                                                                 // domain
         assertTrue(SavingsAccount.isEmailValid("abcd@mail.cc")); // Valid Email Address
 
         assertTrue(SavingsAccount.isEmailValid("abc_def@mail.com")); // Valid Email Address
