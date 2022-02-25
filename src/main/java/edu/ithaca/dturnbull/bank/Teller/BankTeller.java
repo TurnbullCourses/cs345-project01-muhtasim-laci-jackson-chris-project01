@@ -13,7 +13,7 @@ public class BankTeller extends AbstractTeller {
 
 
     @Override
-    public void createAccount(Customer existCustomer, int accountType){
+    public void createAccount(Customer existCustomer, int accountType, double withdrawLimit, double percentInt, double startBal){
         if(accountType == 0){
             existCustomer.setCheckingsAccount(new CheckingsAccount());
         }
@@ -28,12 +28,11 @@ public class BankTeller extends AbstractTeller {
         
     }
 
-    public Customer createAccount(int customerId, String password, int accountType){
+    public Customer createAccount(int customerId, String password, int accountType, double withdrawLimit, double percentInt, double startBal){
         Customer customer = new Customer(customerId, password);
         createAccount(customer, accountType);
 
         return customer;
-
     }
     
 }
