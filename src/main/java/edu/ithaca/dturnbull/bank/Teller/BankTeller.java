@@ -34,7 +34,7 @@ public class BankTeller extends AbstractTeller {
 
     public Customer createAccount(int customerId, String password, int accountType, double withdrawLimit, double percentInt, double startBal){
         Customer customer = new Customer(customerId, password);
-        createAccount(customer, accountType);
+        createAccount(customer, accountType, withdrawLimit, percentInt, startBal);
 
         return customer;
     }

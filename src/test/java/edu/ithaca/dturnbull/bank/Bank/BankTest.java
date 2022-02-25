@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import edu.ithaca.dturnbull.bank.BankAdmin.BankAdmin;
 import edu.ithaca.dturnbull.bank.Customer.Customer;
 import edu.ithaca.dturnbull.bank.Teller.AbstractTeller;
+import edu.ithaca.dturnbull.bank.Teller.BankTeller;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

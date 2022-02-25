@@ -8,9 +8,11 @@ import edu.ithaca.dturnbull.bank.Bank.Bank;
 public class BankAdmin {
 
     private int adminId;
+    private String password;
 
-    public BankAdmin(int adminId){
+    public BankAdmin(int adminId, String password){
         this.adminId = adminId;
+        this.password = password;
     }
 
     /**
@@ -23,5 +25,13 @@ public class BankAdmin {
             total = total + accounts.get(i).getBalance();
         }
         return total;
+    }
+
+    public int getId(){
+        return adminId;
+    }
+
+    public String getPassword(){
+        return password;
     }
 }

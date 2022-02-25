@@ -12,7 +12,7 @@ public abstract class AbstractTeller {
     protected Customer currentCustomer;
 
 
-    abstract void createAccount(Customer existCustomer, int accountType);
+    abstract void createAccount(Customer existCustomer, int accountType, double withdrawLimit, double percentInt, double startBal);
 
     
 
