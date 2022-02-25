@@ -7,27 +7,18 @@ import edu.ithaca.dturnbull.bank.Bank.Bank;
 
 public class BankAdmin {
 
-    private Bank bank;
+    private int adminId;
 
-    public BankAdmin(){
-        bank = new Bank();
-    }
-    
-    /**
-     * Gets an array of all the accounts in the Bank
-     * @return an array of all the accoutns in the bank
-     */
-    private List<AbstractAccount> getAllAccounts(){
-        return bank.getAccounts(); //need to make Bank class
+    public BankAdmin(int adminId){
+        this.adminId = adminId;
     }
 
     /**
      * Gets the total money of all the accounts in the bank
      * @return the total money in the bank
      */
-    public double sumAllAccounts(){
+    public double sumAllAccounts(List<AbstractAccount> accounts){
         double total = 0.0;
-        List<AbstractAccount> accounts = this.getAllAccounts();
         for (int i = 0; i < accounts.size(); i++){
             total = total + accounts.get(i).getBalance();
         }
