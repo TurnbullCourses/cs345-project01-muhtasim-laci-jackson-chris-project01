@@ -21,7 +21,7 @@ public abstract class AbstractAccount {
     /**
     * @post increases the balance by @param amount if amount is non-negative
     */
-    public void deposit(double amount) throws InsufficientFundsException{
+    public void deposit(double amount) throws IllegalArgumentException{
         if (isNumberValid(amount)) {
             balance += amount;
             balance = Math.round(balance * 100.0) / 100.0;

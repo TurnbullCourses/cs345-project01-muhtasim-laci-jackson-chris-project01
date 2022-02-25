@@ -4,11 +4,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BankAccountTest {
+class SavingsAccountTest {
 
     @Test
     void getBalanceTest() throws InsufficientFundsException {
-        SavingsAccount bankAccount = new SavingsAccount("a@b.com", 200, 200, 10.0);
+        SavingsAccount bankAccount = new SavingsAccount( 200, 200, 10.0);
         assertEquals(200, bankAccount.getBalance(), 0.001);
         bankAccount.withdraw(100);
         assertEquals(100, bankAccount.getBalance(), 0.001);
@@ -16,7 +16,7 @@ class BankAccountTest {
 
     @Test
     void withdrawTest() throws InsufficientFundsException {
-        SavingsAccount bankAccount = new SavingsAccount("a@b.com", 200, 200, 10.0);
+        SavingsAccount bankAccount = new SavingsAccount(200, 300, 10.0);
         bankAccount.withdraw(100);
         assertEquals(100, bankAccount.getBalance(), 0.001);
 
@@ -39,9 +39,47 @@ class BankAccountTest {
     }
 
     @Test
+    void withdrawLimitTest() throws InsufficientFundsException {
+        SavingsAccount bankAccount = new SavingsAccount(500, 300, 10.0);
+        bankAccount.withdraw(300);
+        assertEquals(200, bankAccount.getBalance(), 0.001);
+
+        // Withdraw limit exceeded
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(300));
+
+        // Negative number withdrawn
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(-100));
+
+        // Too many decimal places
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(100.999));
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(100.001));
+
+        // Balance does not change when an excepetion is thrown
+        assertEquals(200, bankAccount.getBalance());
+        // Remaining Withdraw Limit Can be 0.
+        assertEquals(0,bankAccount.getRemainingWithdraw());
+        //Reset Withdraw Limit
+        bankAccount.resetWithdrawLimit();
+        assertEquals(300, bankAccount.getRemainingWithdraw());        
+        assertEquals(200,bankAccount.getBalance());
+        //Insuficcient Funds Exception
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(300));
+
+    }
+
+    @Test
+    void interestTest(){
+        SavingsAccount bankAccount = new SavingsAccount( 200, 500, 10.0);
+        assertEquals(10, bankAccount.getInterest());
+        assertEquals(20, bankAccount.calculateInterest());
+        bankAccount.addInterest();
+        assertEquals(220, bankAccount.getBalance());
+    }
+
+    @Test
     void transferTest() throws InsufficientFundsException {
-        SavingsAccount bankAccount = new SavingsAccount("a@b.com", 200, 200, 10.0);
-        SavingsAccount newAccount = new SavingsAccount("new@mail.com", 0, 200, 10.0);
+        SavingsAccount bankAccount = new SavingsAccount( 200, 500, 10.0);
+        SavingsAccount newAccount = new SavingsAccount(0, 200, 10.0);
 
         bankAccount.transfer(100, newAccount);
 
@@ -63,7 +101,7 @@ class BankAccountTest {
 
     @Test
     void depositTest() {
-        SavingsAccount bankAccount = new SavingsAccount("a@b.com", 0.00, 100, 0.5);
+        SavingsAccount bankAccount = new SavingsAccount( 0.00, 100, 0.5);
         bankAccount.deposit(100.00);
         assertEquals(100, bankAccount.getBalance());
 
@@ -83,55 +121,27 @@ class BankAccountTest {
         assertEquals(200, bankAccount.getBalance());
     }
 
-    @Test
-    void isEmailValidTest() {
-        assertTrue(SavingsAccount.isEmailValid("a@b.com")); // Valid Email Address
-        assertFalse(SavingsAccount.isEmailValid("")); // Empty String
-
-        // @ symbol
-        assertFalse(SavingsAccount.isEmailValid("ab@c@mail.com"));
-        assertFalse(SavingsAccount.isEmailValid("abcmail.com"));
-        assertFalse(SavingsAccount.isEmailValid("abc@"));
-        assertFalse(SavingsAccount.isEmailValid("@mail.com"));
-
-        // Special Characters
-        assertFalse(SavingsAccount.isEmailValid("abc-@mail.com")); // No special characters are permitted just before the @
-                                                                // symbol
-        assertFalse(SavingsAccount.isEmailValid("abc#def@mail.com")); // The character # is not permitted in a valid email
-                                                                   // address before the @
-        assertFalse(SavingsAccount.isEmailValid("abc.def@mail'archive.com")); // The character ' is not permitted in a
-                                                                           // valid email address after the @
-
-        // Domain Suffix
-        assertFalse(SavingsAccount.isEmailValid("abcd@mail.c")); // There must be two characters in the suffix of the
-                                                              // domain
-        assertTrue(SavingsAccount.isEmailValid("abcd@mail.cc")); // Valid Email Address
-
-        assertTrue(SavingsAccount.isEmailValid("abc_def@mail.com")); // Valid Email Address
-        assertFalse(SavingsAccount.isEmailValid(".abcd@mail.com")); // Cannot start with a special character
-
-    }
+    
 
     @Test
     void constructorTest() {
-        SavingsAccount bankAccount = new SavingsAccount("a@b.com", 200,200,10);
+        SavingsAccount bankAccount = new SavingsAccount( 200,200,10);
 
-        assertEquals("a@b.com", bankAccount.getEmail());
         assertEquals(200, bankAccount.getBalance(), 0.001);
 
         // check for exception thrown correctly
-        assertThrows(IllegalArgumentException.class, () -> new SavingsAccount("", 100,200,10));
-        assertThrows(IllegalArgumentException.class, () -> new SavingsAccount("a@b.com", 100.001,200,10));
-        assertThrows(IllegalArgumentException.class, () -> new SavingsAccount("a@b.com", 100.999,200,10));
-        assertThrows(IllegalArgumentException.class, () -> new SavingsAccount("a@b.com", -100.00,200,10));
+        assertThrows(IllegalArgumentException.class, () -> new SavingsAccount( 100,200.001,10));
+        assertThrows(IllegalArgumentException.class, () -> new SavingsAccount(100.001,200,10));
+        assertThrows(IllegalArgumentException.class, () -> new SavingsAccount( 100.999,200,10));
+        assertThrows(IllegalArgumentException.class, () -> new SavingsAccount( -100.00,200,10));
 
         // Hanging zeros are not acounted for
-        SavingsAccount testAccoount1 = new SavingsAccount("a@b.com", 200.010,200,10);
-        assertEquals("a@b.com", testAccoount1.getEmail());
+        SavingsAccount testAccoount1 = new SavingsAccount( 200.010,200,10);
+    
         assertEquals(200.01, testAccoount1.getBalance(), 0.001);
 
-        SavingsAccount testAccoount2 = new SavingsAccount("a@b.com", 200.990,200,10);
-        assertEquals("a@b.com", testAccoount2.getEmail());
+        SavingsAccount testAccoount2 = new SavingsAccount( 200.990,200,10);
+        
         assertEquals(200.99, testAccoount2.getBalance(), 0.001);
     }
 
