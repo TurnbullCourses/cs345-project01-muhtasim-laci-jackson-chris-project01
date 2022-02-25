@@ -45,18 +45,26 @@ public abstract class AbstractAccount {
      */
     abstract void transfer(double amount, AbstractAccount transferee)  throws InsufficientFundsException;
 
+    public String historyToString(){
+        String temp = "";
+        for (int i = 0; i < history.size(); i++){
+            temp+=history.get(i);
+        }
+        return temp;
+    }
+
     /**
      * @post checks to see if the @param email is valid
      */
     public void appendTransaction(double amount, String action){
-        this.history.add(toString(amount, action))
+        this.history.add(toString(amount, action));
     }
     
     public String toString(double amount, String action){
         if (action.equals("deposit")){
-            return "Deposited " + amount; 
+            return "Deposited " + amount +"\n"; 
         }else if(action.equals("withdraw")){
-            return "Withdrew " + amount;
+            return "Withdrew " + amount + "\n";
         }
         return action + amount;
     }

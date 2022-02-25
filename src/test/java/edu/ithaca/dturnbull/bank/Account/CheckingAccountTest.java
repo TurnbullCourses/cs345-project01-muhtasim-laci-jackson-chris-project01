@@ -107,6 +107,21 @@ class CheckingAccountTest {
     }
 
     @Test
+    void transactionHistoryTest() throws InsufficientFundsException{
+        CheckingAccount testAccoount = new CheckingAccount(200);
+        CheckingAccount testAccount2 = new CheckingAccount(0);
+        testAccoount.deposit(100);
+        assertEquals("Deposited 100.0\n", testAccoount.historyToString());
+        testAccoount.deposit(100);
+        assertEquals("Deposited 100.0\nDeposited 100.0\n", testAccoount.historyToString());
+        testAccoount.withdraw(100);
+        assertEquals("Deposited 100.0\nDeposited 100.0\nWithdrew 100.0\n", testAccoount.historyToString());
+        testAccoount.transfer(100, testAccount2);
+        assertEquals("Deposited 100.0\nDeposited 100.0\nWithdrew 100.0\nWithdrew 100.0\n", testAccoount.historyToString());
+        assertEquals("Deposited 100.0\n", testAccount2.historyToString());
+    }
+
+    @Test
     void isNumberValidTest() {
         // checks to see if a double has two decimals or less
         assertTrue(CheckingAccount.isNumberValid(100));

@@ -1,5 +1,7 @@
 package edu.ithaca.dturnbull.bank.Account;
 
+import java.util.ArrayList;
+
 public class CheckingAccount extends AbstractAccount {
     /**
      * @throws IllegalArgumentException if email is invalid
@@ -11,6 +13,7 @@ public class CheckingAccount extends AbstractAccount {
             throw new IllegalArgumentException(
                     "Starting Balance: " + startingBalance + " is invalid, cannot create account");
         }
+        this.history = new ArrayList<String>();
     }
 
     /**
@@ -22,7 +25,7 @@ public class CheckingAccount extends AbstractAccount {
             if (amount <= balance) {
                 balance -= amount;
                 balance = Math.round(balance * 100.0) / 100.0; // Multiply by 100 and round to cut off all decimals past
-                                                               // the hundreths place. Divide by 100 to make sure the
+                appendTransaction(amount, "withdraw");   // the hundreths place. Divide by 100 to make sure the
                                                                // number has two decimasl again
             } else {
                 throw new InsufficientFundsException("Not enough money in the account.");
@@ -40,11 +43,8 @@ public class CheckingAccount extends AbstractAccount {
     public void transfer(double amount, AbstractAccount transferee) throws InsufficientFundsException {
         if (isNumberValid(amount)) {
             if (amount <= balance) {
-                balance -= amount;
-                balance = Math.round(balance * 100.0) / 100.0;// Multiply by 100 and round to cut off all decimals
-                                                              // past the
-                transferee.deposit(amount); // hundreths place. Divide by 100 to make sure the number has two
-                                            // decimasl again
+                withdraw(amount);
+                transferee.deposit(amount); 
             } else {
                 throw new InsufficientFundsException("Not enough money in the account.");
             }
