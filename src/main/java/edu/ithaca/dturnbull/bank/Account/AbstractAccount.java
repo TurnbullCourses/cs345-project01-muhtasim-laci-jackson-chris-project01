@@ -3,9 +3,9 @@ package edu.ithaca.dturnbull.bank.Account;
 import java.util.List;
 
 public abstract class AbstractAccount {
-    String email;
-    double balance;
-    List<String> history;
+    protected String email;
+    protected double balance;
+    protected List<String> history;
 
     /**
     * @post @return balance

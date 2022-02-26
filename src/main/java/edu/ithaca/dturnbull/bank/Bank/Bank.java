@@ -111,10 +111,18 @@ public class Bank {
     }
 
     public void createNewAccount(BankTeller teller, Customer existCustomer, int accountType, double withdrawLimit, double percentInt, double startBal){
-
+        teller.createAccount(existCustomer, accountType, withdrawLimit, percentInt, startBal);
     }
 
     public void createNewAccount(BankTeller teller, int customerId, String password, int accountType, double withdrawLimit, double percentInt, double startBal){
+        try{
+            Customer customer = customers.get(customerId);
+            createNewAccount(teller, customer, accountType, withdrawLimit, percentInt, startBal);
+        }
+        catch(IndexOutOfBoundsException e){
+            Customer customer = teller.createAccount(customerId, password, accountType, withdrawLimit, percentInt, startBal);
+            addCustomer(customer);
+        }
         
     }
 
