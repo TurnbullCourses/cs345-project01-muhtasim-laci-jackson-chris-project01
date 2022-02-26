@@ -3,9 +3,9 @@ package edu.ithaca.dturnbull.bank.Account;
 import java.util.List;
 
 public abstract class AbstractAccount {
-    protected String email;
-    protected double balance;
-    protected List<String> history;
+    String email;
+    double balance;
+    List<String> history;
 
     /**
     * @post @return balance
@@ -37,7 +37,7 @@ public abstract class AbstractAccount {
     /**
      * @post reduces the balance by @param amount if amount is non-negative and smaller than balance
      */
-    abstract void withdraw(double Amount)throws InsufficientFundsException;
+    public abstract void withdraw(double Amount)throws InsufficientFundsException;
 
     /**
      * @post reduces the balance by @param amount if amount is non-negative and smaller than balance

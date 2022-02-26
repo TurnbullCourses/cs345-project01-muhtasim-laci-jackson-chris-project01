@@ -10,7 +10,7 @@ public class CustomerTest {
     void constructorTest(){
         Customer customer1= new Customer(12345, "PASSwORD!!!");
         assertEquals(12345,customer1.getid());
-        assertEquals("PASSWORD!!!", customer1.getpassword());
+        assertEquals("PASSwORD!!!", customer1.getpassword());
         Customer customer2 = new Customer(54321, "!!!DROwSSAP");
         assertEquals(54321,customer2.getid());
         assertEquals("!!!DROwSSAP", customer2.getpassword());
