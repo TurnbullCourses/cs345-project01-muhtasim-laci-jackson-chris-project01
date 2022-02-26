@@ -12,7 +12,7 @@ import edu.ithaca.dturnbull.bank.Customer.Customer;
 public class Bank {
 
     private List<AbstractAccount> accounts;
-    private List<AbstractTeller> tellers;
+    private List<BankTeller> tellers;
     private List<BankAdmin> admins;
     private List<Customer> customers;
 
@@ -52,8 +52,8 @@ public class Bank {
      * @param password teller password
      * @return the teller that was logged in
      */
-    public AbstractTeller tellerLogIn(int id, String password){
-        AbstractTeller teller;
+    public BankTeller tellerLogIn(int id, String password){
+        BankTeller teller;
         try{
             teller = tellers.get(id);
         }
@@ -102,7 +102,7 @@ public class Bank {
      * adds a teller to the list of tellers
      * @param teller teller to add
      */
-    public void addTeller(AbstractTeller teller){
+    public void addTeller(BankTeller teller){
         tellers.add(teller);
     }
 
@@ -134,7 +134,7 @@ public class Bank {
      * gets the list of tellers
      * @return list of tellers
      */
-    public List<AbstractTeller> getTellers(){
+    public List<BankTeller> getTellers(){
         return tellers;
     }
 
