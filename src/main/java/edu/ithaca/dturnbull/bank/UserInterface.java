@@ -2,6 +2,7 @@ package edu.ithaca.dturnbull.bank;
 
 import java.util.Scanner;
 
+import edu.ithaca.dturnbull.bank.Account.AbstractAccount;
 import edu.ithaca.dturnbull.bank.Bank.Bank;
 import edu.ithaca.dturnbull.bank.BankAdmin.BankAdmin;
 import edu.ithaca.dturnbull.bank.Customer.Customer;
@@ -180,7 +181,99 @@ public class UserInterface {
     }
 
     private static void createAccountState(BankTeller teller){
-        
+        System.out.println("What type of account would you like to make? (0 for checking, 1 for savings)");
+        try{
+            int account = in.nextInt();
+            if (account < 0 || account > 1){
+                throw new Exception();
+            }
+            if (account == 0){
+                System.out.println("Enter starting balance:");
+                try{
+                    double startBal = in.nextDouble();
+                    System.out.println("Enter Customer id");
+                    try{
+                        int id = in.nextInt();
+                        try{
+                            Customer customer = bank.getCustomers().get(id);
+                            AbstractAccount newAccount = teller.createAccount(customer, account, 0, 0, startBal);
+                            bank.addAccount(newAccount);
+                        }
+                        catch(Exception e){
+                            System.out.println("This customer does not exist, a new one will be made with the id: " + nextId);
+                            System.out.println("Enter a new password:");
+                            try{
+                                String password = in.next();
+                                Customer customer = teller.createAccount(nextId, password, account, 0, 0, startBal);
+                                nextId++;
+                                bank.addCustomer(customer);
+                            }
+                            catch(Exception e1){
+                                System.out.println("Invalid password");
+                            }
+                        }
+                    }
+                    catch(Exception e){
+                        System.out.println("Invalid id");
+                    }
+                }
+                catch(Exception e){
+                    System.out.println("Invalid amount");
+                }
+            }
+            else{
+                System.out.println("Enter starting balance:");
+                try{
+                    double startBal = in.nextDouble();
+                    System.out.println("Enter withdraw limit");
+                    try{
+                        double withdrawLimit = in.nextDouble();
+                        System.out.println("Enter interest rate (out of 100)");
+                        try{
+                            double interestRate = in.nextDouble();
+
+                            System.out.println("Enter Customer id");
+                            try{
+                                int id = in.nextInt();
+                                try{
+                                    Customer customer = bank.getCustomers().get(id);
+                                    AbstractAccount newAccount = teller.createAccount(customer, account, withdrawLimit, interestRate, startBal);
+                                    bank.addAccount(newAccount);
+                                }
+                                catch(Exception e){
+                                    System.out.println("This customer does not exist, a new one will be made with the id: " + nextId);
+                                    System.out.println("Enter a new password:");
+                                    try{
+                                        String password = in.next();
+                                        Customer customer = teller.createAccount(nextId, password, account, withdrawLimit, interestRate, startBal);
+                                        nextId++;
+                                        bank.addCustomer(customer);
+                                    }
+                                    catch(Exception e1){
+                                        System.out.println("Invalid password");
+                                    }
+                                }
+                            }
+                            catch(Exception e){
+                                System.out.println("Invalid id");
+                            }
+                        }
+                        catch(Exception e){
+                            System.out.println("Invalid interest rate");
+                        }
+                    }
+                    catch(Exception e){
+                        System.out.println("Invalid withdraw limit");
+                    }
+                }
+                catch(Exception e){
+                    System.out.println("Invalid amount");
+                }
+            }
+        }
+        catch(Exception e){
+            System.out.println("Not a valid account type.");
+        }
     }
 
     private static void tellerState(BankTeller teller){
