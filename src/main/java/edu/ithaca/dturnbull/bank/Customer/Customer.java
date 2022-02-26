@@ -1,6 +1,8 @@
 package edu.ithaca.dturnbull.bank.Customer;
 
 import edu.ithaca.dturnbull.bank.Account.AbstractAccount;
+import edu.ithaca.dturnbull.bank.Account.CheckingAccount;
+import edu.ithaca.dturnbull.bank.Account.SavingsAccount;
 
 public class Customer {
     private String password;
