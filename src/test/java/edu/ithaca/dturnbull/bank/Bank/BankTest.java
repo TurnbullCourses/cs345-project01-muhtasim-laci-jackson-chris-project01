@@ -9,8 +9,6 @@ import edu.ithaca.dturnbull.bank.Teller.BankTeller;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import javax.xml.namespace.QName;
-
 public class BankTest {
 
     @Test
