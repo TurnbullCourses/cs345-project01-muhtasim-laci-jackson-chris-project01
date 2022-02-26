@@ -47,7 +47,7 @@ public class UserInterface {
                         }
                         else if (response == 1){
                             try{
-                                AbstractTeller teller = bank.tellerLogIn(id, password);
+                                BankTeller teller = bank.tellerLogIn(id, password);
                                 if (teller == null){
                                     throw new Exception();
                                 }
@@ -179,7 +179,11 @@ public class UserInterface {
         }        
     }
 
-    private static void tellerState(AbstractTeller teller){
+    private static void createAccountState(BankTeller teller){
+        
+    }
+
+    private static void tellerState(BankTeller teller){
         boolean done = false;
         while(!done){
             System.out.println("Options:\n0\tCheck Balance\n1\tDeposit\n2\tWithdraw\n3\tTransfer\n4\tCreate Account\n5\tExit");
@@ -200,7 +204,7 @@ public class UserInterface {
                     }
                 }
                 else if (choice == 4){
-                    //need to still write code here
+                    createAccountState(teller);
                 }
                 else{
                     done = true;
