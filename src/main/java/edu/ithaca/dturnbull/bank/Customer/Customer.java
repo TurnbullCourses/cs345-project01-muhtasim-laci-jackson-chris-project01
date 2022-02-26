@@ -20,6 +20,10 @@ public class Customer {
 
     }
 
+    /**
+     * get total balance accross all accounts
+     * @return
+     */
     public double getBalance(){
         return balance;
     }
@@ -38,7 +42,14 @@ public class Customer {
 
     public void setSavingsAccount(SavingsAccount savingsAccount){
         this.savingsAccount = savingsAccount;
-        
+    }
+
+    public AbstractAccount getSavingsAccount(){
+        return savingsAccount;
+    }
+
+    public AbstractAccount getCheckingAccount(){
+        return checkingAccount;
     }
     
 }
