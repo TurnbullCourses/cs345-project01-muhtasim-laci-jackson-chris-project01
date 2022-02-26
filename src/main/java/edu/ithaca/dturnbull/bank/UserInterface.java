@@ -105,7 +105,15 @@ public class UserInterface {
                     System.out.println("How much would you like to deposit?");
                     try{
                         double amount = in.nextDouble();
-                        customer.deposit(amount, account);
+                        if (account == 0){
+                            customer.depositSavingsAccount(amount);
+                        }
+                        else if (account == 1){
+                            customer.depositCheckingAccount(amount);
+                        }
+                        else{
+                            throw new Exception();
+                        }
                     }
                     catch(Exception e){
                         System.out.println("Invalid Amount");
@@ -122,7 +130,15 @@ public class UserInterface {
                     System.out.println("How much would you like to withdraw?");
                     try{
                         double amount = in.nextDouble();
-                        customer.withdraw(amount, account);
+                        if (account == 0){
+                            customer.withdrawSavingsAccount(amount);
+                        }
+                        else if (account == 1){
+                            customer.withdrawCheckingAccount(amount);
+                        }
+                        else{
+                            throw new Exception();
+                        }
                     }
                     catch(Exception e){
                         System.out.println("Invalid Amount");
@@ -142,7 +158,15 @@ public class UserInterface {
                         System.out.println("Enter the id of the customer you wish to transfer the money to");
                         try{
                             int transferId = in.nextInt();
-                            customer.transfer(amount, account, transferId);
+                            if (account == 0){
+                                customer.transferSavingsAccount(amount, bank.getCustomers().get(transferId));
+                            }
+                            else if (account == 1){
+                                customer.transferCheckingAccount(amount, bank.getCustomers().get(transferId));
+                            }
+                            else{
+                                throw new Exception();
+                            }
                         }
                         catch(Exception e){
                                 System.out.println("Invalid id or invalid ammount");
