@@ -92,95 +92,89 @@ public class UserInterface {
     }
 
     private static void customerState(Customer customer, int choice){
-        boolean done = false;
-        while(!done){
-            if (choice == 0){
-                System.out.println(customer.getBalance());
-            }
-            else if (choice == 1){
-                System.out.println("Which account would you like to deposit into? (0 for savings, 1 for checkings)");
+        if (choice == 0){
+            System.out.println(customer.getBalance());
+        }
+        else if (choice == 1){
+            System.out.println("Which account would you like to deposit into? (0 for savings, 1 for checkings)");
+            try{
+                int account = in.nextInt();
+                System.out.println("How much would you like to deposit?");
                 try{
-                    int account = in.nextInt();
-                    System.out.println("How much would you like to deposit?");
+                    double amount = in.nextDouble();
+                    if (account == 0){
+                        customer.depositSavingsAccount(amount);
+                    }
+                    else if (account == 1){
+                        customer.depositCheckingAccount(amount);
+                    }
+                    else{
+                        throw new Exception();
+                    }
+                }
+                catch(Exception e){
+                    System.out.println("Invalid Amount");
+                }
+            }
+            catch(Exception e){
+                System.out.println("Invalid account");
+            }
+        }
+        else if (choice == 2){
+            System.out.println("Which account would you like to withdraw from? (0 for savings, 1 for checkings)");
+            try{
+                int account = in.nextInt();
+                System.out.println("How much would you like to withdraw?");
+                try{
+                    double amount = in.nextDouble();
+                    if (account == 0){
+                        customer.withdrawSavingsAccount(amount);
+                    }
+                    else if (account == 1){
+                        customer.withdrawCheckingAccount(amount);
+                    }
+                    else{
+                        throw new Exception();
+                    }
+                }
+                catch(Exception e){
+                    System.out.println("Invalid Amount");
+                }
+            }
+            catch(Exception e){
+                System.out.println("Invalid account");
+            }
+        }
+        else if (choice == 3){
+            System.out.println("Which account would you like to transfer from? (0 for savings, 1 for checkings)");
+            try{
+                int account = in.nextInt();
+                System.out.println("How much would you like to trasfer?");
+                try{
+                    double amount = in.nextDouble();
+                    System.out.println("Enter the id of the customer you wish to transfer the money to");
                     try{
-                        double amount = in.nextDouble();
+                        int transferId = in.nextInt();
                         if (account == 0){
-                            customer.depositSavingsAccount(amount);
+                            customer.transferSavingsAccount(amount, bank.getCustomers().get(transferId));
                         }
                         else if (account == 1){
-                            customer.depositCheckingAccount(amount);
+                            customer.transferCheckingAccount(amount, bank.getCustomers().get(transferId));
                         }
                         else{
                             throw new Exception();
                         }
                     }
                     catch(Exception e){
-                        System.out.println("Invalid Amount");
+                            System.out.println("Invalid id or invalid ammount");
                     }
                 }
                 catch(Exception e){
-                    System.out.println("Invalid account");
+                    System.out.println("Invalid amount");
                 }
             }
-            else if (choice == 2){
-                System.out.println("Which account would you like to withdraw from? (0 for savings, 1 for checkings)");
-                try{
-                    int account = in.nextInt();
-                    System.out.println("How much would you like to withdraw?");
-                    try{
-                        double amount = in.nextDouble();
-                        if (account == 0){
-                            customer.withdrawSavingsAccount(amount);
-                        }
-                        else if (account == 1){
-                            customer.withdrawCheckingAccount(amount);
-                        }
-                        else{
-                            throw new Exception();
-                        }
-                    }
-                    catch(Exception e){
-                        System.out.println("Invalid Amount");
-                    }
-                }
-                catch(Exception e){
-                    System.out.println("Invalid account");
-                }
-            }
-            else if (choice == 3){
-                System.out.println("Which account would you like to transfer from? (0 for savings, 1 for checkings)");
-                try{
-                    int account = in.nextInt();
-                    System.out.println("How much would you like to trasfer?");
-                    try{
-                        double amount = in.nextDouble();
-                        System.out.println("Enter the id of the customer you wish to transfer the money to");
-                        try{
-                            int transferId = in.nextInt();
-                            if (account == 0){
-                                customer.transferSavingsAccount(amount, bank.getCustomers().get(transferId));
-                            }
-                            else if (account == 1){
-                                customer.transferCheckingAccount(amount, bank.getCustomers().get(transferId));
-                            }
-                            else{
-                                throw new Exception();
-                            }
-                        }
-                        catch(Exception e){
-                                System.out.println("Invalid id or invalid ammount");
-                        }
-                    }
-                    catch(Exception e){
-                        System.out.println("Invalid amount");
-                    }
-                }
-                catch(Exception e){
-                    System.out.println("Invalid account");
-                }
-            }
-            else{
-                done = true;
+            catch(Exception e){
+                System.out.println("Invalid account");
             }
         }
     }
@@ -194,8 +188,12 @@ public class UserInterface {
                 if(choice > 4 || choice < 0){
                     throw new Exception();
                 }
-                customerState(customer, choice);
-                done = true;
+                if (choice < 4){
+                    customerState(customer, choice);
+                }
+                else{
+                    done = true;
+                }
             }
             catch(Exception e){
                 System.out.println("That is not a valid input");
