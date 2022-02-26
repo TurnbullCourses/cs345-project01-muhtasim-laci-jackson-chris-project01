@@ -17,89 +17,91 @@ public class Customer {
         checkingAccount = null;
     }
 
-    /*
-    * 
-    */
-    public double getBalance(){
-        return balance;
-    }
-    /*
-    * 
+    
+    /** 
+    * @return customer ID number
     */
     public int getid(){
         return customerId;
     }
     
-    /*
-    * 
+    public String getpassword(){
+        return password;
+    }
+    
+    
+    /** 
+    * @param checkingAccount associates a checking account to a customer
     */
     public void setCheckingAccount(CheckingAccount checkingAccount){
         this.checkingAccount = checkingAccount;
     }
     
-    /*
-    * 
+    /** 
+    * @param savingsAccount associates a savings account to a customer
     */
     public void setSavingsAccount(SavingsAccount savingsAccount){
         this.savingsAccount = savingsAccount;
     }
     
-    /*
-    * 
-    */
+    /**
+     * @param amount is amount to dpeosit
+     */
     public void depositSavingsAccount(double amount){
         if savingsAccount != null{
             savingsAccount.deposit(amount);
         }
     }
     
-    /*
-    * 
-    */
+    /**
+     * @param amount is amount to dpeosit
+     */
     public void depositCheckingAccount(double amount){
         if checkingAccount != null{
             checkingAccount.deposit(amount);
         }
     }
     
-    /*
-    * 
-    */
+    /**
+     * @param amount is amount to withdraw
+     */
     public void withdrawSavingsAccount(double amount){
         if savingsAccount != null{
             savingsAccount.withdraw(amount);
         }
     }
     
-    /*
-    * 
-    */
+    /**
+     * @param amount is amount to withdraw
+     */
     public void withdrawCheckingAccount(double amount){
         if checkingAccount != null{
             checkingAccount.withdraw(amount);
         }
     }
     
-    /*
-    * 
-    */
+    /**
+     * @param amount is amount to transfer
+     * @param customerID is the customer to transfer to
+     */
     public void transferSavingsAccount(double amount, int customerID){
         if savingsAccount != null{
             savingsAccount.transfer(amount, bank.getCustomers().get(id).getSavingsAccount());
         }
     }
     
-    /*
-    * @ amount
-    */
+    /**
+     * @param amount is amount to transfer
+     * @param customerID is the customer to transfer to
+     */
     public void transferCheckingAccount(double amount, int customerID){
         if checkingAccount != null{
             checkingAccount.transfer(amount, bank.getCustomers().get(id).getCheckingAccount());
         }
     }
 
-    /*
-    * Get the balance from the savings account
+    /**
+    * @return Get the balance from the savings account
     */
     public double getSavingsBalance(){
         if savingsAccount != null{
@@ -107,8 +109,8 @@ public class Customer {
         }
     }
     
-    /*
-    * Get the balance from the savings account
+    /**
+    * @return Get the balance from the checking account
     */
     public double getCheckingBalance(){
         if checkingAccount != null{
