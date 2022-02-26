@@ -15,14 +15,12 @@ public class Bank {
     private List<AbstractTeller> tellers;
     private List<BankAdmin> admins;
     private List<Customer> customers;
-    private int nextId;
 
     public Bank(){
         accounts = new ArrayList<>();
         tellers = new ArrayList<>();
         admins = new ArrayList<>();
         customers = new ArrayList<>();
-        nextId = 0;
     }
 
     /**
@@ -94,7 +92,6 @@ public class Bank {
 
     public void addCustomer(Customer customer){
         customers.add(customer);
-        nextId++;
     }
 
     public List<AbstractAccount> getAccounts(){
