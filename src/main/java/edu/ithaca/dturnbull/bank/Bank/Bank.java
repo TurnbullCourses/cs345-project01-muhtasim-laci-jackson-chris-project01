@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.ithaca.dturnbull.bank.Teller.AbstractTeller;
+import edu.ithaca.dturnbull.bank.Teller.BankTeller;
 import edu.ithaca.dturnbull.bank.Account.AbstractAccount;
 import edu.ithaca.dturnbull.bank.BankAdmin.BankAdmin;
 import edu.ithaca.dturnbull.bank.Customer.Customer;
@@ -24,16 +25,59 @@ public class Bank {
         nextId = 0;
     }
 
+    /**
+     * login a customer based off of their id and password
+     * @param id customer id
+     * @param password customer password
+     * @return the customer that was logged in
+     */
     public Customer customerLogIn(int id, String password){
-        return null;
+        Customer customer;
+        try{
+            customer = customers.get(id);
+        }
+        catch(IndexOutOfBoundsException e){
+            return null;
+        }
+        if (customer.getPassword().equals(password)){
+            return customer;
+        }
+        else{
+            return null;
+        }
+
     }
 
     public AbstractTeller tellerLogIn(int id, String password){
-        return null;
+        AbstractTeller teller;
+        try{
+            teller = tellers.get(id);
+        }
+        catch(IndexOutOfBoundsException e){
+            return null;
+        }
+        if (teller.getPassword().equals(password)){
+            return teller;
+        }
+        else{
+            return null;
+        }
     }
 
     public BankAdmin adminLogIn(int id, String password){
-        return null;
+        BankAdmin admin;
+        try{
+            admin = admins.get(id);
+        }
+        catch(IndexOutOfBoundsException e){
+            return null;
+        }
+        if (admin.getPassword().equals(password)){
+            return admin;
+        }
+        else{
+            return null;
+        }
     }
 
     public void addAccount(AbstractAccount account){

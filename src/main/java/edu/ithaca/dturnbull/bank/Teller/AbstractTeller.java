@@ -6,13 +6,18 @@ import edu.ithaca.dturnbull.bank.Customer.Customer;
 
 
 public abstract class AbstractTeller {
-    protected String username;
+    protected int id;
     protected String password;
-    protected boolean confirmed;
-    protected Customer currentCustomer;
 
 
     abstract void createAccount(Customer existCustomer, int accountType, double withdrawLimit, double percentInt, double startBal);
+    public int getId(){
+        return id;
+    }
+
+    public String getPassword(){
+        return password;
+    }
 
     
 

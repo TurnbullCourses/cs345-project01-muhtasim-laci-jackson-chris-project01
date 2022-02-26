@@ -26,6 +26,10 @@ public class Customer {
         return customerId;
     }
 
+    public String getPassword(){
+        return password;
+    }
+
     public void setCheckingsAccount(CheckingAccount checkingAccount){
         this.checkingAccount = checkingAccount;
     }
