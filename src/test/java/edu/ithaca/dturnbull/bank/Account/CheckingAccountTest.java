@@ -4,11 +4,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BankAccountTest {
+class CheckingAccountTest {
 
     @Test
     void getBalanceTest() throws InsufficientFundsException {
-        BankAccount bankAccount = new BankAccount("a@b.com", 200);
+        CheckingAccount bankAccount = new CheckingAccount( 200);
         assertEquals(200, bankAccount.getBalance(), 0.001);
         bankAccount.withdraw(100);
         assertEquals(100, bankAccount.getBalance(), 0.001);
@@ -16,7 +16,7 @@ class BankAccountTest {
 
     @Test
     void withdrawTest() throws InsufficientFundsException {
-        BankAccount bankAccount = new BankAccount("a@b.com", 200);
+        CheckingAccount bankAccount = new CheckingAccount(200);
         bankAccount.withdraw(100);
         assertEquals(100, bankAccount.getBalance(), 0.001);
 
@@ -40,8 +40,8 @@ class BankAccountTest {
 
     @Test
     void transferTest() throws InsufficientFundsException {
-        BankAccount bankAccount = new BankAccount("a@b.com", 200);
-        BankAccount newAccount = new BankAccount("new@mail.com", 0);
+        CheckingAccount bankAccount = new CheckingAccount( 200);
+        CheckingAccount newAccount = new CheckingAccount(0);
 
         bankAccount.transfer(100, newAccount);
 
@@ -63,7 +63,7 @@ class BankAccountTest {
 
     @Test
     void depositTest() {
-        BankAccount bankAccount = new BankAccount("a@b.com", 0.00);
+        CheckingAccount bankAccount = new CheckingAccount( 0.00);
         bankAccount.deposit(100.00);
         assertEquals(100, bankAccount.getBalance());
 
@@ -83,82 +83,55 @@ class BankAccountTest {
         assertEquals(200, bankAccount.getBalance());
     }
 
-    @Test
-    void isEmailValidTest() {
-        assertTrue(BankAccount.isEmailValid("a@b.com")); // Valid Email Address
-        assertFalse(BankAccount.isEmailValid("")); // Empty String
-
-        // @ symbol
-        assertFalse(BankAccount.isEmailValid("ab@c@mail.com"));
-        assertFalse(BankAccount.isEmailValid("abcmail.com"));
-        assertFalse(BankAccount.isEmailValid("abc@"));
-        assertFalse(BankAccount.isEmailValid("@mail.com"));
-
-        // Special Characters
-        assertFalse(BankAccount.isEmailValid("abc-@mail.com")); // No special characters are permitted just before the @
-                                                                // symbol
-        assertFalse(BankAccount.isEmailValid("abc#def@mail.com")); // The character # is not permitted in a valid email
-                                                                   // address before the @
-        assertFalse(BankAccount.isEmailValid("abc.def@mail'archive.com")); // The character ' is not permitted in a
-                                                                           // valid email address after the @
-
-        // Domain Suffix
-        assertFalse(BankAccount.isEmailValid("abcd@mail.c")); // There must be two characters in the suffix of the
-                                                              // domain
-        assertTrue(BankAccount.isEmailValid("abcd@mail.cc")); // Valid Email Address
-
-        assertTrue(BankAccount.isEmailValid("abc_def@mail.com")); // Valid Email Address
-        assertFalse(BankAccount.isEmailValid(".abcd@mail.com")); // Cannot start with a special character
-
-    }
+    
 
     @Test
     void constructorTest() {
-        BankAccount bankAccount = new BankAccount("a@b.com", 200);
+        CheckingAccount bankAccount = new CheckingAccount( 200);
 
-        assertEquals("a@b.com", bankAccount.getEmail());
         assertEquals(200, bankAccount.getBalance(), 0.001);
 
         // check for exception thrown correctly
-        assertThrows(IllegalArgumentException.class, () -> new BankAccount("", 100));
-        assertThrows(IllegalArgumentException.class, () -> new BankAccount("a@b.com", 100.001));
-        assertThrows(IllegalArgumentException.class, () -> new BankAccount("a@b.com", 100.999));
-        assertThrows(IllegalArgumentException.class, () -> new BankAccount("a@b.com", -100.00));
+        assertThrows(IllegalArgumentException.class, () -> new CheckingAccount(100.001));
+        assertThrows(IllegalArgumentException.class, () -> new CheckingAccount( 100.999));
+        assertThrows(IllegalArgumentException.class, () -> new CheckingAccount( -100.00));
 
         // Hanging zeros are not acounted for
-        BankAccount testAccoount1 = new BankAccount("a@b.com", 200.010);
-        assertEquals("a@b.com", testAccoount1.getEmail());
+        CheckingAccount testAccoount1 = new CheckingAccount( 200.010);
+    
         assertEquals(200.01, testAccoount1.getBalance(), 0.001);
 
-        BankAccount testAccoount2 = new BankAccount("a@b.com", 200.990);
-        assertEquals("a@b.com", testAccoount2.getEmail());
+        CheckingAccount testAccoount2 = new CheckingAccount( 200.990);
+        
         assertEquals(200.99, testAccoount2.getBalance(), 0.001);
+    }
+
+    @Test
+    void transactionHistoryTest() throws InsufficientFundsException{
+        CheckingAccount testAccoount = new CheckingAccount(200);
+        CheckingAccount testAccount2 = new CheckingAccount(0);
+        testAccoount.deposit(100);
+        assertEquals("Deposited 100.0\n", testAccoount.historyToString());
+        testAccoount.deposit(100);
+        assertEquals("Deposited 100.0\nDeposited 100.0\n", testAccoount.historyToString());
+        testAccoount.withdraw(100);
+        assertEquals("Deposited 100.0\nDeposited 100.0\nWithdrew 100.0\n", testAccoount.historyToString());
+        testAccoount.transfer(100, testAccount2);
+        assertEquals("Deposited 100.0\nDeposited 100.0\nWithdrew 100.0\nWithdrew 100.0\n", testAccoount.historyToString());
+        assertEquals("Deposited 100.0\n", testAccount2.historyToString());
     }
 
     @Test
     void isNumberValidTest() {
         // checks to see if a double has two decimals or less
-        assertTrue(BankAccount.isNumberValid(100));
-        assertTrue(BankAccount.isNumberValid(100.1));
-        assertTrue(BankAccount.isNumberValid(100.11));
-        assertFalse(BankAccount.isNumberValid(100.111));
+        assertTrue(CheckingAccount.isNumberValid(100));
+        assertTrue(CheckingAccount.isNumberValid(100.1));
+        assertTrue(CheckingAccount.isNumberValid(100.11));
+        assertFalse(CheckingAccount.isNumberValid(100.111));
 
         // amount is a positive number
-        assertTrue(BankAccount.isNumberValid(10));
-        assertFalse(BankAccount.isNumberValid(-10));
-        assertFalse(BankAccount.isNumberValid(-100));
+        assertTrue(CheckingAccount.isNumberValid(10));
+        assertFalse(CheckingAccount.isNumberValid(-10));
+        assertFalse(CheckingAccount.isNumberValid(-100));
     }
-
-    @Test
-    void freezeAndUnfreezeTest() {
-
-    }
-
-    @Test
-    void addTest(){
-        assertEquals(12, BankAccount.add(5.0, 7.0));
-        assertEquals(12.90, BankAccount.add(5.70,7.20));
-
-    }
-
 }
