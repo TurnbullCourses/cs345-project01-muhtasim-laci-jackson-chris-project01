@@ -6,7 +6,6 @@ import edu.ithaca.dturnbull.bank.Account.AbstractAccount;
 import edu.ithaca.dturnbull.bank.Bank.Bank;
 import edu.ithaca.dturnbull.bank.BankAdmin.BankAdmin;
 import edu.ithaca.dturnbull.bank.Customer.Customer;
-import edu.ithaca.dturnbull.bank.Teller.AbstractTeller;
 import edu.ithaca.dturnbull.bank.Teller.BankTeller;
 
 public class UserInterface {
