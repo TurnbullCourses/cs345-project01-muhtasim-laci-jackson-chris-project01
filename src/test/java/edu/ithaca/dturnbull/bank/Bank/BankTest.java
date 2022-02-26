@@ -49,14 +49,21 @@ public class BankTest {
         bank.addTeller(teller);
 
         assertEquals(null, customer.getCheckingAccount()); //account should not exist
-        teller.createAccount(customer, 0, 0, 0, 500); //make checking account
+        bank.createNewAccount(teller, customer, 0, 0, 0, 500); //make checking account
         assertEquals(500, customer.getCheckingAccount().getBalance()); // should have 500 balance in new accounts
         assertEquals(500, customer.getBalance()); //should only have 500 accross all accounts as well
 
         assertEquals(null, customer.getSavingsAccount());
-        teller.createAccount(customer, 1, 1000, 5, 500);
+        bank.createNewAccount(teller, customer, 1, 1000, 5, 500);
         assertEquals(500, customer.getSavingsAccount().getBalance());
         assertEquals(1000, customer.getBalance());
+
+        bank.createNewAccount(teller, 1, "password", 0, 0, 0, 200);
+        Customer customer1 = bank.customerLogIn(1, "password");
+        assertEquals(customer1.getCheckingAccount().getBalance(), 200); //make sure customer was created in right spot and has correct balance
+        bank.createNewAccount(teller, 1, "password", 1, 500, 2, 200);
+        assertEquals(customer1.getSavingsAccount().getBalance(), 200); //make sure that a new customer is not created and a new account is made
+        assertEquals(customer1.getBalance(), 400);
 
     }
     

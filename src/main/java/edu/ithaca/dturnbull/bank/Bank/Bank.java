@@ -110,7 +110,11 @@ public class Bank {
         return customers;
     }
 
-    public void createNewAccount(BankTeller teller){
+    public void createNewAccount(BankTeller teller, Customer existCustomer, int accountType, double withdrawLimit, double percentInt, double startBal){
+
+    }
+
+    public void createNewAccount(BankTeller teller, int customerId, String password, int accountType, double withdrawLimit, double percentInt, double startBal){
         
     }
 
