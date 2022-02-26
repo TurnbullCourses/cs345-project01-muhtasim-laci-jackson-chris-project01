@@ -44,7 +44,7 @@ public class Customer {
     }
 
     public void setSavingsAccount(SavingsAccount savingsAccount){
-        if (this.checkingAccount == null){
+        if (this.savingsAccount == null){
             this.savingsAccount = savingsAccount;
             this.balance = this.balance + savingsAccount.getBalance();
         }
