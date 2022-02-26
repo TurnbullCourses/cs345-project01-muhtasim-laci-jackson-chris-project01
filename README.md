@@ -6,10 +6,18 @@ Names:
 Chris Weil, Laci Young, Muhtasim Hossain, Jackson Becker
 
 Link to UML Use Case Diagram:
-https://drive.google.com/file/d/1YR7iFRCsNJpYXwJkxQKg1nByO2iGP3zU/view?usp=sharing
+1. - https://drive.google.com/file/d/1YR7iFRCsNJpYXwJkxQKg1nByO2iGP3zU/view?usp=sharing
 
 Link to UML Class Diagram:
-https://drive.google.com/file/d/1M3HjVJGuvxFAXUw-VHSkgHE5aYIsfxNK/view?usp=sharing
+1. - https://drive.google.com/file/d/1M3HjVJGuvxFAXUw-VHSkgHE5aYIsfxNK/view?usp=sharing
+
+Link to Three UML Sequence Diagrams:
+1. - https://drive.google.com/file/d/1axMBmrIVEeI1aQromatMRzf3uKxM-3yz/view
+2. - 
+3. - 
+
+Link to UML State Diagram:
+
 
 Three Use Cases that you will implement first:
 1. - Login
@@ -18,13 +26,10 @@ Three Use Cases that you will implement first:
 
 Which classes & methods do you need to implement for these use cases?
 (Indicated which team member is responsible for the implemenation)
-1. - Customer/Client - Chris / Laci
-2. - ATM - Jackson
-3. - Teller/Account - Muhtasim
-3. - Login - Chris
-4. - Create/close account - Muhtasim
-5. - Deposit/Withdraw - Jackson
-6. - Transfer - Laci
+1. - Account Super and subclasses Jackson
+2. - 
+3. - 
+4. - 
 
 Don't forget to use Test-Driven Development (TDD)
 1. Write Class and Method Function Headers
