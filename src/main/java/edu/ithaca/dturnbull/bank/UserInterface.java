@@ -67,6 +67,7 @@ public class UserInterface {
                                     throw new Exception();
                                 }
                                 else{
+                                    adminState(admin);
                                     login = true;
                                 }
                             }
@@ -87,7 +88,6 @@ public class UserInterface {
             catch(Exception e){
                 System.out.println("That is not a valid input.");
             }
-            
         }
     }
 
@@ -200,7 +200,29 @@ public class UserInterface {
                     }
                 }
                 else if (choice == 4){
-                    
+                    //need to still write code here
+                }
+                else{
+                    done = true;
+                }
+            }
+            catch(Exception e){
+                System.out.println("That is not a valid input");
+            }
+        }
+    }
+
+    private static void adminState(BankAdmin admin){
+        boolean done = false;
+        while(!done){
+            System.out.println("Options:\n0\tGet Total Balance\n1\tExit");
+            try{
+                int choice = in.nextInt();
+                if (choice < 0 || choice > 1){
+                    throw new Exception();
+                }
+                if (choice == 0){
+                    System.out.println(admin.sumAllAccounts(bank.getAccounts()));
                 }
                 else{
                     done = true;
