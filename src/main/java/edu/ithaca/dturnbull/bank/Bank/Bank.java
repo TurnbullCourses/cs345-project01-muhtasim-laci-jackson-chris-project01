@@ -14,7 +14,7 @@ public class Bank {
     private List<AbstractAccount> accounts;
     private List<AbstractTeller> tellers;
     private List<BankAdmin> admins;
-    private List<Customer> customers;
+    private static List<Customer> customers;
 
     public Bank(){
         accounts = new ArrayList<>();
