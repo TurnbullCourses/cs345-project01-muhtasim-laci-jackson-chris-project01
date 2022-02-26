@@ -150,7 +150,7 @@ public class Bank {
      * gets the list of customers
      * @return list of customers
      */
-    public List<Customer> getCustomers(){
+    public static List<Customer> getCustomers(){
         return customers;
     }
 

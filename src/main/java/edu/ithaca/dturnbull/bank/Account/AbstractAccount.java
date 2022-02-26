@@ -43,7 +43,7 @@ public abstract class AbstractAccount {
      * @post reduces the balance by @param amount if amount is non-negative and smaller than balance
      * increases the balance of @param transferee 
      */
-    abstract void transfer(double amount, AbstractAccount transferee)  throws InsufficientFundsException;
+    public abstract void transfer(double amount, AbstractAccount transferee)  throws InsufficientFundsException;
 
     public String historyToString(){
         String temp = "";
