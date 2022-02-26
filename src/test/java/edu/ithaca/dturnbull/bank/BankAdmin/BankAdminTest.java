@@ -18,13 +18,13 @@ public class BankAdminTest {
         BankTeller teller = new BankTeller(0, "password");
         bank.addTeller(teller);
 
-        assertEquals(0, admin.sumAllAccounts(bank.getAccounts()));
+        assertEquals(0, admin.sumAllAccounts(bank.getAccounts())); //make sure no money
         bank.createNewAccount(teller, 0, "password", 0, 0, 0, 500);
         bank.createNewAccount(teller, bank.getCustomers().get(0), 1, 1000, 1, 200);
-        assertEquals(700, admin.sumAllAccounts(bank.getAccounts()));
+        assertEquals(700, admin.sumAllAccounts(bank.getAccounts())); //all money in one customer
         bank.createNewAccount(teller, 1, "password", 0, 0, 0, 1000);
         bank.createNewAccount(teller, 2, "password", 0, 0, 0, 1);
-        assertEquals(1701, admin.sumAllAccounts(bank.getAccounts()));
+        assertEquals(1701, admin.sumAllAccounts(bank.getAccounts())); //all money in multiple customers
     }
     
 }
