@@ -1,5 +1,6 @@
 package edu.ithaca.dturnbull.bank.Teller;
 
+import edu.ithaca.dturnbull.bank.Account.AbstractAccount;
 import edu.ithaca.dturnbull.bank.Account.CheckingAccount;
 import edu.ithaca.dturnbull.bank.Account.SavingsAccount;
 import edu.ithaca.dturnbull.bank.Customer.Customer;
@@ -16,16 +17,21 @@ public class BankTeller extends AbstractTeller {
 
 
     @Override
-    public void createAccount(Customer existCustomer, int accountType, double withdrawLimit, double percentInt, double startBal){
+    public AbstractAccount createAccount(Customer existCustomer, int accountType, double withdrawLimit, double percentInt, double startBal){
         if(accountType == 0){
-            existCustomer.setCheckingsAccount(new CheckingAccount(startBal));
+            CheckingAccount account = new CheckingAccount(startBal);
+            existCustomer.setCheckingsAccount(account);
+            return account;
         }
         else if(accountType == 1){
-            existCustomer.setSavingsAccount(new SavingsAccount(startBal, withdrawLimit, percentInt));
+            SavingsAccount account = new SavingsAccount(startBal, withdrawLimit, percentInt);
+            existCustomer.setSavingsAccount(account);
+            return account;
         }
         else{
             existCustomer.setCheckingsAccount(new CheckingAccount(startBal));
             existCustomer.setSavingsAccount(new SavingsAccount(startBal, withdrawLimit, percentInt));
+            return null;
         }
 
         
@@ -34,7 +40,6 @@ public class BankTeller extends AbstractTeller {
     public Customer createAccount(int customerId, String password, int accountType, double withdrawLimit, double percentInt, double startBal){
         Customer customer = new Customer(customerId, password);
         createAccount(customer, accountType, withdrawLimit, percentInt, startBal);
-
         return customer;
     }
 
