@@ -37,13 +37,17 @@ public class Customer {
     }
 
     public void setCheckingsAccount(CheckingAccount checkingAccount){
-        this.checkingAccount = checkingAccount;
-        this.balance = this.balance + checkingAccount.getBalance();
+        if (this.checkingAccount == null){
+            this.checkingAccount = checkingAccount;
+            this.balance = this.balance + checkingAccount.getBalance();
+        }
     }
 
     public void setSavingsAccount(SavingsAccount savingsAccount){
-        this.savingsAccount = savingsAccount;
-        this.balance = this.balance + savingsAccount.getBalance();
+        if (this.checkingAccount == null){
+            this.savingsAccount = savingsAccount;
+            this.balance = this.balance + savingsAccount.getBalance();
+        }
     }
 
     public AbstractAccount getSavingsAccount(){
