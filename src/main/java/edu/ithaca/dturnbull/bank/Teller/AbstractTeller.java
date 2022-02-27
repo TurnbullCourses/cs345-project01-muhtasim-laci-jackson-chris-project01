@@ -1,7 +1,7 @@
 package edu.ithaca.dturnbull.bank.Teller;
 
 import edu.ithaca.dturnbull.bank.Account.AbstractAccount;
-//import edu.ithaca.dturnbull.bank.Account.InsufficientFundsException;
+import edu.ithaca.dturnbull.bank.Account.InsufficientFundsException;
 //import edu.ithaca.dturnbull.bank.Account.Account;
 import edu.ithaca.dturnbull.bank.Customer.Customer;
 
@@ -49,6 +49,15 @@ public abstract class AbstractTeller {
     * @post @return balance of checking or savings account
     */
     public abstract double getBalance(AbstractAccount account);
+
+        /**
+     * @post reduces the balance of checking or savings account by @param amount if amount is 
+     * non-negative and smaller than balance
+     */
+    public abstract void withdraw(double amount, AbstractAccount account) throws InsufficientFundsException;
+    
+
+
 
 
 
