@@ -8,15 +8,9 @@ import org.junit.jupiter.api.Test;
 import edu.ithaca.dturnbull.bank.Account.InsufficientFundsException;
 import edu.ithaca.dturnbull.bank.Teller.BankTeller;
 
-public class BankTellerTest {
 
-    @Test
-    void loginTest(){
-        BankTeller bankTeller = new BankTeller();
-        bankTeller.login("MWaowski123", "Gatorade749!");
-        assertFalse(bankTeller.login("MikeW", "Powerade947!"));
-        bankTeller.createAccount(); 
-    }
+
+public class BankTellerTest {
 
     
     @Test
@@ -30,7 +24,7 @@ public class BankTellerTest {
 
     @Test
     void withdrawTest() throws InsufficientFundsException {
-        BankTeller bankAccount = new BankTeller("a@b.com", 200);
+        BankAccount bankAccount = new BankAccount("a@b.com", 200);
         bankAccount.withdraw(100);
         assertEquals(100, bankAccount.getBalance(), 0.001);
 
@@ -76,3 +70,4 @@ public class BankTellerTest {
     }
 
 }
+
