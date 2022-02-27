@@ -23,7 +23,7 @@ public abstract class AbstractTeller {
         return password;
     }
 
-    abstract AbstractAccount createAccount(Customer existCustomer, int accountType, double withdrawLimit, double per);
+    abstract AbstractAccount createAccount(Customer existCustomer, int accountType, double withdrawLimit, double per, double startVal);
     /**
      * @post checks to see if the @param num is valid
      */
