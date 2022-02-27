@@ -1,15 +1,18 @@
 package edu.ithaca.dturnbull.bank.Teller;
 
 import edu.ithaca.dturnbull.bank.Account.AbstractAccount;
+<<<<<<< HEAD
 import edu.ithaca.dturnbull.bank.Account.InsufficientFundsException;
 //import edu.ithaca.dturnbull.bank.Account.Account;
+=======
+>>>>>>> 3a9e8211de162fac9841c8a8a4482655651e4470
 import edu.ithaca.dturnbull.bank.Customer.Customer;
 
-import java.util.Scanner;
-import java.util.Random;
+
 
 
 public abstract class AbstractTeller {
+<<<<<<< HEAD
 
     protected int id;
     protected String password;
@@ -56,10 +59,23 @@ public abstract class AbstractTeller {
 
     
 
+=======
+    protected int id;
+    protected String password;
+
+
+    abstract AbstractAccount createAccount(Customer existCustomer, int accountType, double withdrawLimit, double percentInt, double startBal);
+    public int getId(){
+        return id;
+    }
+
+    public String getPassword(){
+        return password;
+    }
+>>>>>>> 3a9e8211de162fac9841c8a8a4482655651e4470
 
     
 
 
 
-    
 }
