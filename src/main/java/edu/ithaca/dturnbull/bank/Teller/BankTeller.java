@@ -20,7 +20,7 @@ public class BankTeller extends AbstractTeller {
     public AbstractAccount createAccount(Customer existCustomer, int accountType, double withdrawLimit, double percentInt, double startBal){
         if(accountType == 0){
             CheckingAccount account = new CheckingAccount(startBal);
-            existCustomer.setCheckingsAccount(account);
+            existCustomer.setCheckingAccount(account);
             return account;
         }
         else if(accountType == 1){
@@ -29,7 +29,7 @@ public class BankTeller extends AbstractTeller {
             return account;
         }
         else{
-            existCustomer.setCheckingsAccount(new CheckingAccount(startBal));
+            existCustomer.setCheckingAccount(new CheckingAccount(startBal));
             existCustomer.setSavingsAccount(new SavingsAccount(startBal, withdrawLimit, percentInt));
             return null;
         }
@@ -43,6 +43,4 @@ public class BankTeller extends AbstractTeller {
         return customer;
     }
 
-   
-    
 }
