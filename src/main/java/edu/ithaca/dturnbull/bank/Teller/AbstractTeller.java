@@ -1,5 +1,8 @@
 package edu.ithaca.dturnbull.bank.Teller;
 
+import edu.ithaca.dturnbull.bank.Account.AbstractAccount;
+//import edu.ithaca.dturnbull.bank.Account.InsufficientFundsException;
+//import edu.ithaca.dturnbull.bank.Account.Account;
 import edu.ithaca.dturnbull.bank.Customer.Customer;
 
 import java.util.Scanner;
@@ -41,6 +44,16 @@ public abstract class AbstractTeller {
 
         return accountNum;
     }
+
+    /**
+    * @post @return balance of checking or savings account
+    */
+    public abstract double getBalance(AbstractAccount account);
+
+
+
+    
+
 
     
 
