@@ -13,7 +13,7 @@ public class Bank {
     private List<AbstractAccount> accounts;
     private List<BankTeller> tellers;
     private List<BankAdmin> admins;
-    private static List<Customer> customers;
+    private List<Customer> customers;
 
     public Bank(){
         accounts = new ArrayList<>();
@@ -149,7 +149,7 @@ public class Bank {
      * gets the list of customers
      * @return list of customers
      */
-    public static List<Customer> getCustomers(){
+    public List<Customer> getCustomers(){
         return customers;
     }
 

@@ -61,10 +61,10 @@ public class CustomerTest {
         bank.addAccount(account2);
         bank.addAccount(account3);
         bank.addAccount(account4);
-        customer1.transferCheckingAccount(100, 1);
+        customer1.transferCheckingAccount(100, customer2);
         assertEquals(0, customer1.getCheckingBalance());
         assertEquals(200, customer2.getCheckingBalance());
-        customer1.transferSavingsAccount(100, 1);
+        customer1.transferSavingsAccount(100, customer2);
         assertEquals(0, customer1.getSavingsBalance());
         assertEquals(200, customer2.getSavingsBalance());
     }
