@@ -1,8 +1,11 @@
 package edu.ithaca.dturnbull.bank.Account;
 
+import java.util.List;
+
 public abstract class AbstractAccount {
     String email;
     double balance;
+    List<String> history;
 
     /**
     * @post @return balance
@@ -21,10 +24,11 @@ public abstract class AbstractAccount {
     /**
     * @post increases the balance by @param amount if amount is non-negative
     */
-    public void deposit(double amount) throws InsufficientFundsException{
+    public void deposit(double amount) throws IllegalArgumentException{
         if (isNumberValid(amount)) {
             balance += amount;
             balance = Math.round(balance * 100.0) / 100.0;
+            appendTransaction(amount, "deposit");
         } else {
             throw new IllegalArgumentException("Amount to deposit is invalid");
         }
@@ -33,77 +37,39 @@ public abstract class AbstractAccount {
     /**
      * @post reduces the balance by @param amount if amount is non-negative and smaller than balance
      */
-    abstract void withdraw(double Amount)throws InsufficientFundsException;
+    public abstract void withdraw(double Amount)throws InsufficientFundsException;
 
     /**
      * @post reduces the balance by @param amount if amount is non-negative and smaller than balance
      * increases the balance of @param transferee 
      */
-    abstract void transfer(double amoount, BankAccount transferee)  throws InsufficientFundsException;
+    public abstract void transfer(double amount, AbstractAccount transferee)  throws InsufficientFundsException;
+
+    public String historyToString(){
+        String temp = "";
+        for (int i = 0; i < history.size(); i++){
+            temp+=history.get(i);
+        }
+        return temp;
+    }
 
     /**
      * @post checks to see if the @param email is valid
      */
-    public static boolean isEmailValid(String email){
-        Boolean valid = true;
-        String prefix = email.split("@")[0].toString();
-
-        if (prefix == "") {
-            return false;
-        }
-
-        if (prefix.startsWith(".") || prefix.startsWith("!") || prefix.startsWith("#") || prefix.startsWith("'")) {
-            return false;
-        }
-
-        if (prefix.contains("@")) {
-            return false;
-        }
-
-        if (prefix.endsWith("-")) {
-            return false;
-        }        
-
-        if (prefix.contains("#")) {
-            return false;
-        }
+    public void appendTransaction(double amount, String action){
+        this.history.add(toString(amount, action));
+    }
     
-        if (email.indexOf('@') == -1){
-            return false;
-        } 
-
-        if (email.endsWith("@")) {
-            return false;
+    public String toString(double amount, String action){
+        if (action.equals("deposit")){
+            return "Deposited " + amount +"\n"; 
+        }else if(action.equals("withdraw")){
+            return "Withdrew " + amount + "\n";
         }
-
-        //check domain
-        String domain = email.split("@")[1].toString();
-
-        if (!domain.contains(".")) {
-            return false;
-        }
-
-        if (domain.contains("@")) {
-            return false;
-        }
-
-        if (domain == "") {
-            return false;
-        }
-        
-        String domainLastPortion = domain.split("\\.")[1].toString();
-        if (domain.contains("#") || domain.contains("'")) {
-            return false;
-        }
-
-        if (domainLastPortion.length() < 2) {
-            return false;
-        }
-
-        return valid;
+        return action + amount;
     }
 
-      /**
+     /**
      * @post checks to see if the @param num is valid
      */
     public static boolean isNumberValid(double num) {
