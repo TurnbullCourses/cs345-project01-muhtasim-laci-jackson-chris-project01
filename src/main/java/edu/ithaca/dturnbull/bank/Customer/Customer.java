@@ -20,7 +20,16 @@ public class Customer {
     }
 
     public double getBalance(){
-        return getCheckingBalance() + getSavingsBalance();
+        double total = 0;
+        try{
+            total = total + getCheckingBalance();
+        }
+        catch(IllegalArgumentException e){}
+        try{
+            total = total + getSavingsBalance();
+        }
+        catch(IllegalArgumentException e){}
+        return total;
     }
 
     

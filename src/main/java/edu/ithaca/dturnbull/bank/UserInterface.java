@@ -362,6 +362,7 @@ public class UserInterface {
         Customer intialCustomer = new Customer(nextId, "password");
         nextId++;
         bank.addCustomer(intialCustomer);
+        intialTeller.createAccount(intialCustomer, 0, 0, 0, 0);
 
         //go to state to login
         loginState();
