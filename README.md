@@ -13,7 +13,7 @@ Link to UML Class Diagram:
 
 Link to Three UML Sequence Diagrams:
 1. - https://drive.google.com/file/d/1axMBmrIVEeI1aQromatMRzf3uKxM-3yz/view
-2. - 
+2. - https://drive.google.com/file/d/1JEtO3Va6-7gzI1q3C54skkdU9BFPt7xP/view?usp=sharing
 3. - 
 
 Link to UML State Diagram:
@@ -22,12 +22,12 @@ Link to UML State Diagram:
 Three Use Cases that you will implement first:
 1. - Login
 2. - Deposit/Withdraw/Transfer
-3. - Transfer
+3. - Create Account
 
 Which classes & methods do you need to implement for these use cases?
 (Indicated which team member is responsible for the implemenation)
 1. - Account Super and subclasses Jackson
-2. - 
+2. - Bank and Admin Classes, Including admin sequence diagram - Chris
 3. - 
 4. - 
 
