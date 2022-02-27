@@ -14,7 +14,6 @@ public class BankTeller extends AbstractTeller {
 
     }
 
-    @Override
     public AbstractAccount createAccount(Customer existCustomer, int accountType, double withdrawLimit, double percentInt, double startBal){
         if(accountType == 0){
             CheckingAccount account = new CheckingAccount(startBal);
@@ -31,8 +30,6 @@ public class BankTeller extends AbstractTeller {
             existCustomer.setSavingsAccount(new SavingsAccount(startBal, withdrawLimit, percentInt));
             return null;
         }
-
-        
     }
 
     public Customer createAccount(int customerId, String password, int accountType, double withdrawLimit, double percentInt, double startBal){
@@ -57,14 +54,16 @@ public class BankTeller extends AbstractTeller {
         account.deposit(amount);
     }
 
-
-
     @Override
-    public void transfer(int accountNumberTo, double amount, AbstractAccount transferee) {
-        // TODO Auto-generated method stub
-        
+    public void transfer(AbstractAccount account, double amount, AbstractAccount transferee) throws InsufficientFundsException {  
+        if (isNumberValid(amount) == true){
+            if (amount <= account.getBalance()){
+                account.transfer(amount, transferee);
+            }
+        }
+        else {
+            throw new IllegalArgumentException("Amount to withdraw is invalid.");
+        }
     }
 
-   
-    
 }
