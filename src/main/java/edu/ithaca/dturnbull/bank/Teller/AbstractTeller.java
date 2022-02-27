@@ -1,28 +1,41 @@
 package edu.ithaca.dturnbull.bank.Teller;
 
 import edu.ithaca.dturnbull.bank.Account.AbstractAccount;
-<<<<<<< HEAD
 import edu.ithaca.dturnbull.bank.Account.InsufficientFundsException;
 //import edu.ithaca.dturnbull.bank.Account.Account;
-=======
->>>>>>> 3a9e8211de162fac9841c8a8a4482655651e4470
+//import edu.ithaca.dturnbull.bank.Customer.Customer;
 import edu.ithaca.dturnbull.bank.Customer.Customer;
 
-
+//import java.util.Scanner;
+//import java.util.Random;
 
 
 public abstract class AbstractTeller {
-<<<<<<< HEAD
 
     protected int id;
     protected String password;
 
-    private boolean checkAmount(double amount, AbstractAccount account){
-        boolean pass = false;
-        if (amount > 0 && amount < account.getBalance()){
-            pass = true;
+    public int getId(){
+        return id;
+    }
+
+    public String getPassword(){
+        return password;
+    }
+
+    abstract AbstractAccount createAccount(Customer existCustomer, int accountType, double withdrawLimit, double per);
+    /**
+     * @post checks to see if the @param num is valid
+     */
+    public static boolean isNumberValid(double num) {
+        if (num < 0) {
+            return false;
         }
-        return pass;
+        String numString = Double.toString(num); // convert number to string
+        int decimalIndex = numString.indexOf("."); // Find index of ".""
+        int decimalPlaces = numString.length() - decimalIndex - 1; // Subtract total length by the index of ".".
+                                                                   // Subtract by an extra 1 to account for index 0
+        return (decimalPlaces <= 2); // Check to see if decimal places is less than 2
     }
 
     /**
@@ -45,37 +58,7 @@ public abstract class AbstractTeller {
      * @post reduces the balance by @param amount if amount is non-negative and smaller than balance
      * increases the balance of @param transferee 
      */
-    public abstract void transfer(int accountNumberTo, double amount, AbstractAccount transferee);
-
-
-
-
-
-
-
-
-
-
-
+    public abstract void transfer(AbstractAccount account, double amount, AbstractAccount transferee) throws InsufficientFundsException;
     
-
-=======
-    protected int id;
-    protected String password;
-
-
-    abstract AbstractAccount createAccount(Customer existCustomer, int accountType, double withdrawLimit, double percentInt, double startBal);
-    public int getId(){
-        return id;
-    }
-
-    public String getPassword(){
-        return password;
-    }
->>>>>>> 3a9e8211de162fac9841c8a8a4482655651e4470
-
     
-
-
-
 }
