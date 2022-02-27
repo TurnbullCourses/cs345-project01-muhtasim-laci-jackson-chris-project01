@@ -10,39 +10,16 @@ import java.util.Random;
 
 
 public abstract class AbstractTeller {
-    protected String username;
+
+    protected int id;
     protected String password;
-    protected boolean confirmed;
-    protected Customer currentCustomer;
 
-
-    public boolean login(String username, String password){
-        if (this.username.equals(username)){
-            if (this.password.equals(password)){
-                return true;
-            }
-            else{
-                return false;
-            }
+    private boolean checkAmount(double amount, AbstractAccount account){
+        boolean pass = false;
+        if (amount > 0 && amount < account.getBalance()){
+            pass = true;
         }
-        return false;
-    }
-
-
-    public int accountPin(){
-        System.out.println("Create 4 digit pin");
-        Scanner input2 = new Scanner(System.in);
-        int pin = input2.nextInt();
-        input2.close();
-        return pin;
-    }
-    
-
-    public int accountNumber(){
-        Random random = new Random();
-        int accountNum = (int)(random.nextInt()*5000);
-
-        return accountNum;
+        return pass;
     }
 
     /**
@@ -60,6 +37,15 @@ public abstract class AbstractTeller {
     * @post increases the balance by @param amount if amount is non-negative
     */
     public abstract void deposit(double amount, AbstractAccount account) throws InsufficientFundsException;
+
+    /**
+     * @post reduces the balance by @param amount if amount is non-negative and smaller than balance
+     * increases the balance of @param transferee 
+     */
+    public abstract void transfer(int accountNumberTo, double amount, AbstractAccount transferee);
+
+
+
 
 
 
