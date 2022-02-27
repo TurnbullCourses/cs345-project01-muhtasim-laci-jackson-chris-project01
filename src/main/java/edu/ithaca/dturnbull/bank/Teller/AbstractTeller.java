@@ -56,6 +56,13 @@ public abstract class AbstractTeller {
      */
     public abstract void withdraw(double amount, AbstractAccount account) throws InsufficientFundsException;
     
+        /**
+    * @post increases the balance by @param amount if amount is non-negative
+    */
+    public abstract void deposit(double amount, AbstractAccount account) throws InsufficientFundsException;
+
+
+
 
 
 
