@@ -19,6 +19,10 @@ public class Customer {
         checkingAccount = null;
     }
 
+    public double getBalance(){
+        return getCheckingBalance() + getSavingsBalance();
+    }
+
     
     /** 
     * @return customer ID number
