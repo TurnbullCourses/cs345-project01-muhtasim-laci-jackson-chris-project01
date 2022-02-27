@@ -64,10 +64,10 @@ public class BankTest {
         bank.createNewAccount(teller, 1, "password", 0, 0, 0, 200);
         assertEquals(3, bank.getAccounts().size());
         Customer customer1 = bank.customerLogIn(1, "password");
-        assertEquals(customer1.getCheckingAccount().getBalance(), 200); //make sure customer was created in right spot and has correct balance
+        assertEquals(200, customer1.getCheckingAccount().getBalance()); //make sure customer was created in right spot and has correct balance
         bank.createNewAccount(teller, 1, "password", 1, 500, 2, 200);
-        assertEquals(customer1.getSavingsAccount().getBalance(), 200); //make sure that a new customer is not created and a new account is made
-        assertEquals(customer1.getBalance(), 400);
+        assertEquals(200, customer1.getSavingsAccount().getBalance()); //make sure that a new customer is not created and a new account is made
+        assertEquals(400, customer1.getBalance());
         assertEquals(4, bank.getAccounts().size());
 
     }
