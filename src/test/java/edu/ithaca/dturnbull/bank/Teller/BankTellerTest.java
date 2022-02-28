@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+<<<<<<< HEAD
 import edu.ithaca.dturnbull.bank.Account.AbstractAccount;
 import edu.ithaca.dturnbull.bank.Account.CheckingAccount;
 import edu.ithaca.dturnbull.bank.Account.InsufficientFundsException;
@@ -21,6 +22,14 @@ public class BankTellerTest {
 
     
     @Test
+=======
+import edu.ithaca.dturnbull.bank.Teller.BankTeller;
+
+public class BankTellerTest {
+
+    
+    
+>>>>>>> main
     void createAccountTest(){
         AbstractTeller bankTeller = new BankTeller(1454,"snowday303");
         Customer newCustomer = new Customer(4004, "poodles");

@@ -20,6 +20,19 @@ public class Customer {
         checkingAccount = null;
     }
 
+    public double getBalance(){
+        double total = 0;
+        try{
+            total = total + getCheckingBalance();
+        }
+        catch(IllegalArgumentException e){}
+        try{
+            total = total + getSavingsBalance();
+        }
+        catch(IllegalArgumentException e){}
+        return total;
+    }
+
     
     /** 
     * @return customer ID number

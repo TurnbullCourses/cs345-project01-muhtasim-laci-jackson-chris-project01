@@ -26,10 +26,12 @@ Three Use Cases that you will implement first:
 
 Which classes & methods do you need to implement for these use cases?
 (Indicated which team member is responsible for the implemenation)
-1. - Account Super and subclasses Jackson
+1. - Account Superclass, Subclass, and Customer Class - Jackson
 2. - Bank and Admin Classes, Including admin sequence diagram - Chris
 3. - 
 4. - 
+
+Link to User Test Script: 
 
 Don't forget to use Test-Driven Development (TDD)
 1. Write Class and Method Function Headers

@@ -49,13 +49,13 @@ public class BankTest {
         BankTeller teller = new BankTeller(0, "password");
         bank.addTeller(teller);
 
-        assertEquals(null, customer.getCheckingAccount()); //account should not exist
+        assertThrows(IllegalArgumentException.class, ()-> customer.getCheckingAccount()); //account should not exist
         bank.createNewAccount(teller, customer, 0, 0, 0, 500); //make checking account
         assertEquals(500, customer.getCheckingAccount().getBalance()); // should have 500 balance in new accounts
         assertEquals(500, customer.getBalance()); //should only have 500 accross all accounts as well
         assertEquals(1, bank.getAccounts().size()); //make sure account was added to account list
 
-        assertEquals(null, customer.getSavingsAccount());
+        assertThrows(IllegalArgumentException.class, ()-> customer.getSavingsAccount());
         bank.createNewAccount(teller, customer, 1, 1000, 5, 500);
         assertEquals(500, customer.getSavingsAccount().getBalance());
         assertEquals(1000, customer.getBalance());
@@ -64,10 +64,10 @@ public class BankTest {
         bank.createNewAccount(teller, 1, "password", 0, 0, 0, 200);
         assertEquals(3, bank.getAccounts().size());
         Customer customer1 = bank.customerLogIn(1, "password");
-        assertEquals(customer1.getCheckingAccount().getBalance(), 200); //make sure customer was created in right spot and has correct balance
+        assertEquals(200, customer1.getCheckingAccount().getBalance()); //make sure customer was created in right spot and has correct balance
         bank.createNewAccount(teller, 1, "password", 1, 500, 2, 200);
-        assertEquals(customer1.getSavingsAccount().getBalance(), 200); //make sure that a new customer is not created and a new account is made
-        assertEquals(customer1.getBalance(), 400);
+        assertEquals(200, customer1.getSavingsAccount().getBalance()); //make sure that a new customer is not created and a new account is made
+        assertEquals(400, customer1.getBalance());
         assertEquals(4, bank.getAccounts().size());
 
     }
