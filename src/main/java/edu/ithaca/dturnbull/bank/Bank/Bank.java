@@ -13,11 +13,7 @@ public class Bank {
     private List<AbstractAccount> accounts;
     private List<BankTeller> tellers;
     private List<BankAdmin> admins;
-<<<<<<< HEAD
-    private static List<Customer> customers;
-=======
     private List<Customer> customers;
->>>>>>> main
 
     public Bank(){
         accounts = new ArrayList<>();

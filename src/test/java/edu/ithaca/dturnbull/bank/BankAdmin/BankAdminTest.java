@@ -25,8 +25,6 @@ public class BankAdminTest {
         bank.createNewAccount(teller, 1, "password", 0, 0, 0, 1000);
         bank.createNewAccount(teller, 2, "password", 0, 0, 0, 1);
         assertEquals(1701, admin.sumAllAccounts(bank.getAccounts())); //all money in multiple customers
-<<<<<<< HEAD
-=======
     }
 
     @Test
@@ -71,7 +69,6 @@ public class BankAdminTest {
         //make sure admin works
         assertEquals(1750, admin.sumAllAccounts(bank.getAccounts()));
 
->>>>>>> main
     }
     
 }

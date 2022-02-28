@@ -15,172 +15,6 @@ public class UserInterface {
     private static Bank bank = new Bank();
     private static int nextId = 0; //for customer Id's
 
-<<<<<<< HEAD
-    private static void loginState(){
-        boolean login = false;
-        while (!login){
-            System.out.println("Are you a customer, teller, or admin (0, 1, 2)?");
-            try{
-                int response = in.nextInt();
-                if (response > 2 || response < 0){
-                    throw new Exception();
-                }
-                System.out.println("Please enter your userId:");
-                try{
-                    int id = in.nextInt();
-                    System.out.println("Please enter your password:");
-                    try{
-                        String password = in.next();
-                        if (response == 0){
-                            try{
-                                Customer customer = bank.customerLogIn(id, password);
-                                if (customer == null){
-                                    throw new Exception();
-                                }
-                                else{
-                                    customerState(customer);
-                                    login = true;
-                                }
-                            }
-                            catch(Exception e){
-                                System.out.println("I am sorry, that is not a valid login.");
-                            }
-                        }
-                        else if (response == 1){
-                            try{
-                                BankTeller teller = bank.tellerLogIn(id, password);
-                                if (teller == null){
-                                    throw new Exception();
-                                }
-                                else{
-                                    tellerState(teller);
-                                    login = true;
-                                }
-                            }
-                            catch(Exception e){
-                                System.out.println("I am sorry, that is not a valid login.");
-                            }
-                        }
-                        else{
-                            try{
-                                BankAdmin admin = bank.adminLogIn(id, password);
-                                if (admin == null){
-                                    throw new Exception();
-                                }
-                                else{
-                                    adminState(admin);
-                                    login = true;
-                                }
-                            }
-                            catch(Exception e){
-                                System.out.println("I am sorry, that is not a valid login.");
-                            }
-                        }
-                    }
-                    catch(Exception e){
-                        System.out.println("That is not a valid password.");
-                    }
-                    
-                }
-                catch(Exception e){
-                    System.out.println("That is not a valid id.");
-                }
-            }
-            catch(Exception e){
-                System.out.println("That is not a valid input.");
-            }
-        }
-    }
-
-    private static void customerState(Customer customer, int choice){
-        if (choice == 0){
-            System.out.println(customer.getBalance());
-        }
-        else if (choice == 1){
-            System.out.println("Which account would you like to deposit into? (0 for savings, 1 for checkings)");
-            try{
-                int account = in.nextInt();
-                System.out.println("How much would you like to deposit?");
-                try{
-                    double amount = in.nextDouble();
-                    if (account == 0){
-                        customer.depositSavingsAccount(amount);
-                    }
-                    else if (account == 1){
-                        customer.depositCheckingAccount(amount);
-                    }
-                    else{
-                        throw new Exception();
-                    }
-                }
-                catch(Exception e){
-                    System.out.println("Invalid Amount");
-                }
-            }
-            catch(Exception e){
-                System.out.println("Invalid account");
-            }
-        }
-        else if (choice == 2){
-            System.out.println("Which account would you like to withdraw from? (0 for savings, 1 for checkings)");
-            try{
-                int account = in.nextInt();
-                System.out.println("How much would you like to withdraw?");
-                try{
-                    double amount = in.nextDouble();
-                    if (account == 0){
-                        customer.withdrawSavingsAccount(amount);
-                    }
-                    else if (account == 1){
-                        customer.withdrawCheckingAccount(amount);
-                    }
-                    else{
-                        throw new Exception();
-                    }
-                }
-                catch(Exception e){
-                    System.out.println("Invalid Amount");
-                }
-            }
-            catch(Exception e){
-                System.out.println("Invalid account");
-            }
-        }
-        else if (choice == 3){
-            System.out.println("Which account would you like to transfer from? (0 for savings, 1 for checkings)");
-            try{
-                int account = in.nextInt();
-                System.out.println("How much would you like to trasfer?");
-                try{
-                    double amount = in.nextDouble();
-                    System.out.println("Enter the id of the customer you wish to transfer the money to");
-                    try{
-                        int transferId = in.nextInt();
-                        if (account == 0){
-                            customer.transferSavingsAccount(amount, bank.getCustomers().get(transferId));
-                        }
-                        else if (account == 1){
-                            customer.transferCheckingAccount(amount, bank.getCustomers().get(transferId));
-                        }
-                        else{
-                            throw new Exception();
-                        }
-                    }
-                    catch(Exception e){
-                            System.out.println("Invalid id or invalid ammount");
-                    }
-                }
-                catch(Exception e){
-                    System.out.println("Invalid amount");
-                }
-            }
-            catch(Exception e){
-                System.out.println("Invalid account");
-            }
-        }
-    }
-
-=======
     private static boolean loginState(){
         boolean login = false;
         boolean done = false;
@@ -353,7 +187,6 @@ public class UserInterface {
         }
     }
 
->>>>>>> main
     private static void customerState(Customer customer){
         boolean done = false;
         while(!done){
@@ -433,29 +266,18 @@ public class UserInterface {
                                 int id = in.nextInt();
                                 try{
                                     Customer customer = bank.getCustomers().get(id);
-<<<<<<< HEAD
-                                    AbstractAccount newAccount = teller.createAccount(customer, account, withdrawLimit, interestRate, startBal);
-                                    bank.addAccount(newAccount);
-=======
                                     if (customer == null){
                                         throw new Exception();
                                     }
                                     bank.createNewAccount(teller, customer, account, withdrawLimit, interestRate, startBal);
->>>>>>> main
                                 }
                                 catch(Exception e){
                                     System.out.println("This customer does not exist, a new one will be made with the id: " + nextId);
                                     System.out.println("Enter a new password:");
                                     try{
                                         String password = in.next();
-<<<<<<< HEAD
-                                        Customer customer = teller.createAccount(nextId, password, account, withdrawLimit, interestRate, startBal);
-                                        nextId++;
-                                        bank.addCustomer(customer);
-=======
                                         bank.createNewAccount(teller, nextId, password, account, withdrawLimit, interestRate, startBal);
                                         nextId++;
->>>>>>> main
                                     }
                                     catch(Exception e1){
                                         System.out.println("Invalid password");
@@ -549,11 +371,6 @@ public class UserInterface {
         Customer intialCustomer = new Customer(nextId, "password");
         nextId++;
         bank.addCustomer(intialCustomer);
-<<<<<<< HEAD
-
-        //go to state to login
-        loginState();
-=======
         bank.createNewAccount(intialTeller, intialCustomer, 0, 0, 0, 0);
 
         //go to state to login
@@ -562,7 +379,6 @@ public class UserInterface {
             done = loginState();
         }
         
->>>>>>> main
 
         //close scanner
         in.close();

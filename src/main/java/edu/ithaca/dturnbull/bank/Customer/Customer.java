@@ -4,7 +4,6 @@ import edu.ithaca.dturnbull.bank.Account.AbstractAccount;
 import edu.ithaca.dturnbull.bank.Account.CheckingAccount;
 import edu.ithaca.dturnbull.bank.Account.InsufficientFundsException;
 import edu.ithaca.dturnbull.bank.Account.SavingsAccount;
-import edu.ithaca.dturnbull.bank.Bank.Bank;
 
 
 public class Customer {
@@ -113,9 +112,9 @@ public class Customer {
      * @param customerID is the customer to transfer to
      * @throws InsufficientFundsException
      */
-    public void transferSavingsAccount(double amount, int customerID) throws InsufficientFundsException{
+    public void transferSavingsAccount(double amount, Customer customer) throws InsufficientFundsException{
         if (savingsAccount != null){
-            savingsAccount.transfer(amount, Bank.getCustomers().get(customerID).getSavingsAccount());
+            savingsAccount.transfer(amount, customer.getSavingsAccount());
         }else{
             throw new IllegalArgumentException("This account does not exist");
         }
@@ -126,9 +125,9 @@ public class Customer {
      * @param customerID is the customer to transfer to
      * @throws InsufficientFundsException
      */
-    public void transferCheckingAccount(double amount, int customerID) throws InsufficientFundsException{
+    public void transferCheckingAccount(double amount, Customer customer) throws InsufficientFundsException{
         if (checkingAccount != null){
-            checkingAccount.transfer(amount, Bank.getCustomers().get(customerID).getCheckingAccount());
+            checkingAccount.transfer(amount, customer.getCheckingAccount());
         }else{
             throw new IllegalArgumentException("This account does not exist");
         }
