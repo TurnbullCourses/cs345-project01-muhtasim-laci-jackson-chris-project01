@@ -13,6 +13,7 @@ import edu.ithaca.dturnbull.bank.Account.AbstractAccount;
 import edu.ithaca.dturnbull.bank.Account.CheckingAccount;
 import edu.ithaca.dturnbull.bank.Account.InsufficientFundsException;
 //import edu.ithaca.dturnbull.bank.Teller.BankTeller;
+import edu.ithaca.dturnbull.bank.Customer.Customer;
 
 
 
@@ -21,13 +22,16 @@ public class BankTellerTest {
     
     @Test
     void createAccountTest(){
-        //Bank teller creates customers account
-        
-        
+        AbstractTeller bankTeller = new BankTeller(1454,"snowday303");
+        Customer newCustomer = new Customer(4004, "poodles");
+
+        AbstractAccount account = bankTeller.createAccount(newCustomer, 0, 500, 5, 0);
+
+        assertEquals(0, account.getBalance());
+
         
     }
     
-
 
     @Test
     void withdrawAndGetBalanceTest() throws InsufficientFundsException {
@@ -130,7 +134,7 @@ public class BankTellerTest {
 
         assertNotEquals(0000, teller.getId());
 
-        
+
         // check for exception thrown correctly
         assertThrows(IllegalArgumentException.class, () -> new CheckingAccount(100.001));
         assertThrows(IllegalArgumentException.class, () -> new CheckingAccount( 100.999));
