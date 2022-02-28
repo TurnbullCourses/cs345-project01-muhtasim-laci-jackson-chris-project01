@@ -11,6 +11,7 @@ public class BankTeller extends AbstractTeller {
     public BankTeller(int id, String password){
         this.id = id;
         this.password = password;
+   
 
     }
 
@@ -59,6 +60,9 @@ public class BankTeller extends AbstractTeller {
         if (isNumberValid(amount) == true){
             if (amount <= account.getBalance()){
                 account.transfer(amount, transferee);
+            }
+            else {
+                throw new InsufficientFundsException("Not enough money in the account.");
             }
         }
         else {
