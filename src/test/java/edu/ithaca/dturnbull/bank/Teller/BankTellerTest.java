@@ -2,6 +2,7 @@ package edu.ithaca.dturnbull.bank.Teller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 //import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -117,4 +118,31 @@ public class BankTellerTest {
         assertFalse(CheckingAccount.isNumberValid(-100));
     }
 
+    @Test
+    void constructorTest() {
+        AbstractTeller teller = new BankTeller(4004,"HeyHiHello10");
+
+        assertEquals(4004, teller.getId(), 0.001);
+
+        assertEquals("HeyHiHello10", teller.getPassword());
+
+        assertNotEquals("NotPassword", teller.getPassword());
+
+        assertNotEquals(0000, teller.getId());
+
+        
+        // check for exception thrown correctly
+        assertThrows(IllegalArgumentException.class, () -> new CheckingAccount(100.001));
+        assertThrows(IllegalArgumentException.class, () -> new CheckingAccount( 100.999));
+        assertThrows(IllegalArgumentException.class, () -> new CheckingAccount( -100.00));
+
+        // Hanging zeros are not acounted for
+        CheckingAccount testAccoount1 = new CheckingAccount( 200.010);
+    
+        assertEquals(200.01, testAccoount1.getBalance(), 0.001);
+
+        CheckingAccount testAccoount2 = new CheckingAccount( 200.990);
+        
+        assertEquals(200.99, testAccoount2.getBalance(), 0.001);
+    }
 }
