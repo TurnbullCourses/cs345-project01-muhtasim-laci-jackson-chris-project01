@@ -25,13 +25,14 @@ public class BankTellerTest {
     }
     
 
+
     @Test
-    void withdrawTest() throws InsufficientFundsException {
+    void withdrawAndGetBalanceTest() throws InsufficientFundsException {
         AbstractTeller teller = new BankTeller(1454,"snowday303");
         AbstractAccount bankAccount = new CheckingAccount(200.0);
             
         teller.withdraw(100.0, bankAccount);
-        assertEquals(100, bankAccount.getBalance(), 0.001);
+        assertEquals(100, teller.getBalance(bankAccount), 0.001);
 
         // Overdrawn
         assertThrows(InsufficientFundsException.class, () -> teller.withdraw(300,bankAccount));
@@ -44,11 +45,11 @@ public class BankTellerTest {
         assertThrows(IllegalArgumentException.class, () -> teller.withdraw(100.001,bankAccount));
 
         // Balance does not change when an excepetion is thrown
-        assertEquals(100, bankAccount.getBalance());
+        assertEquals(100, teller.getBalance(bankAccount));
 
         // Hanging zeros are not accounted for
         teller.withdraw(100.000,bankAccount);
-        assertEquals(0, bankAccount.getBalance());
+        assertEquals(0, teller.getBalance(bankAccount));
     }
   
     @Test
@@ -74,6 +75,5 @@ public class BankTellerTest {
                                                                                                   // more than 2
                                                                                                        // decimals
     }
-
 }
 
