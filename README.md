@@ -31,7 +31,7 @@ Which classes & methods do you need to implement for these use cases?
 3. - 
 4. - 
 
-Link to User Test Script: 
+Link to User Test Script: https://docs.google.com/document/d/1z2OVbb1JsH9_xEOb779SKdbPfaU454HaignxMly5AGQ/edit?usp=sharing
 
 Don't forget to use Test-Driven Development (TDD)
 1. Write Class and Method Function Headers
