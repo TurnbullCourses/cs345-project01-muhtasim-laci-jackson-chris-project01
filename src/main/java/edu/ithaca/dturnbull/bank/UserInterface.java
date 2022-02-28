@@ -266,17 +266,18 @@ public class UserInterface {
                                 int id = in.nextInt();
                                 try{
                                     Customer customer = bank.getCustomers().get(id);
-                                    AbstractAccount newAccount = teller.createAccount(customer, account, withdrawLimit, interestRate, startBal);
-                                    bank.addAccount(newAccount);
+                                    if (customer == null){
+                                        throw new Exception();
+                                    }
+                                    bank.createNewAccount(teller, customer, account, withdrawLimit, interestRate, startBal);
                                 }
                                 catch(Exception e){
                                     System.out.println("This customer does not exist, a new one will be made with the id: " + nextId);
                                     System.out.println("Enter a new password:");
                                     try{
                                         String password = in.next();
-                                        Customer customer = teller.createAccount(nextId, password, account, withdrawLimit, interestRate, startBal);
+                                        bank.createNewAccount(teller, nextId, password, account, withdrawLimit, interestRate, startBal);
                                         nextId++;
-                                        bank.addCustomer(customer);
                                     }
                                     catch(Exception e1){
                                         System.out.println("Invalid password");
@@ -370,7 +371,7 @@ public class UserInterface {
         Customer intialCustomer = new Customer(nextId, "password");
         nextId++;
         bank.addCustomer(intialCustomer);
-        intialTeller.createAccount(intialCustomer, 0, 0, 0, 0);
+        bank.createNewAccount(intialTeller, intialCustomer, 0, 0, 0, 0);
 
         //go to state to login
         boolean done = false;

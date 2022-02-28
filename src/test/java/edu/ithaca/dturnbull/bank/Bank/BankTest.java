@@ -49,13 +49,13 @@ public class BankTest {
         BankTeller teller = new BankTeller(0, "password");
         bank.addTeller(teller);
 
-        assertEquals(null, customer.getCheckingAccount()); //account should not exist
+        assertThrows(IllegalArgumentException.class, ()-> customer.getCheckingAccount()); //account should not exist
         bank.createNewAccount(teller, customer, 0, 0, 0, 500); //make checking account
         assertEquals(500, customer.getCheckingAccount().getBalance()); // should have 500 balance in new accounts
         assertEquals(500, customer.getBalance()); //should only have 500 accross all accounts as well
         assertEquals(1, bank.getAccounts().size()); //make sure account was added to account list
 
-        assertEquals(null, customer.getSavingsAccount());
+        assertThrows(IllegalArgumentException.class, ()-> customer.getSavingsAccount());
         bank.createNewAccount(teller, customer, 1, 1000, 5, 500);
         assertEquals(500, customer.getSavingsAccount().getBalance());
         assertEquals(1000, customer.getBalance());

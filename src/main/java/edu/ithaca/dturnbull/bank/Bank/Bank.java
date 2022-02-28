@@ -164,7 +164,7 @@ public class Bank {
      * @param startBal the starting balance in the account
      */
     public void createNewAccount(BankTeller teller, Customer existCustomer, int accountType, double withdrawLimit, double percentInt, double startBal){
-        AbstractAccount account = teller.createAccount(existCustomer, accountType, withdrawLimit, percentInt, startBal);
+        AbstractAccount account = (AbstractAccount) teller.createAccount(existCustomer, accountType, withdrawLimit, percentInt, startBal);
         accounts.add(account);
     }
 
@@ -181,20 +181,23 @@ public class Bank {
     public void createNewAccount(BankTeller teller, int customerId, String password, int accountType, double withdrawLimit, double percentInt, double startBal){
         try{
             Customer customer = customers.get(customerId);
+            if (customer == null){
+                throw new IndexOutOfBoundsException();
+            }
             createNewAccount(teller, customer, accountType, withdrawLimit, percentInt, startBal);
         }
         catch(IndexOutOfBoundsException e){
             Customer customer = teller.createAccount(customerId, password, accountType, withdrawLimit, percentInt, startBal);
             addCustomer(customer);
             if (accountType == 0){
-                accounts.add(customer.getCheckingAccount());
+                accounts.add((AbstractAccount) customer.getCheckingAccount());
             }
             else if (accountType == 1){
-                accounts.add(customer.getSavingsAccount());
+                accounts.add((AbstractAccount) customer.getSavingsAccount());
             }
             else{
-                accounts.add(customer.getCheckingAccount());
-                accounts.add(customer.getSavingsAccount());
+                accounts.add((AbstractAccount) customer.getCheckingAccount());
+                accounts.add((AbstractAccount) customer.getSavingsAccount());
             }
         }
         
