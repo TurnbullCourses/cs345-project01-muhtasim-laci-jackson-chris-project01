@@ -14,9 +14,10 @@ Link to UML Class Diagram:
 Link to Three UML Sequence Diagrams:
 1. - https://drive.google.com/file/d/1axMBmrIVEeI1aQromatMRzf3uKxM-3yz/view
 2. - https://drive.google.com/file/d/1JEtO3Va6-7gzI1q3C54skkdU9BFPt7xP/view?usp=sharing
-3. - 
+3. - https://drive.google.com/file/d/1_s58Z_je0qk6kox_bSZ6mOwSEIFcR3aB/view?usp=sharing
 
 Link to UML State Diagram:
+1. - https://drive.google.com/file/d/10bb04JFydXI5MPZoJ_eTtLWLCOzynTFV/view?usp=sharing
 
 
 Three Use Cases that you will implement first:
@@ -28,7 +29,7 @@ Which classes & methods do you need to implement for these use cases?
 (Indicated which team member is responsible for the implemenation)
 1. - Account Superclass, Subclass, and Customer Class - Jackson
 2. - Bank and Admin Classes, Including admin sequence diagram - Chris
-3. - 
+3. - AbstractTeller and BankTeller classes & createAccount sequence diagram - Laci
 4. - 
 
 Link to User Test Script: https://docs.google.com/document/d/1z2OVbb1JsH9_xEOb779SKdbPfaU454HaignxMly5AGQ/edit?usp=sharing
