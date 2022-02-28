@@ -14,6 +14,7 @@ public abstract class AbstractTeller {
 
     protected int id;
     protected String password;
+   
 
     public int getId(){
         return id;
