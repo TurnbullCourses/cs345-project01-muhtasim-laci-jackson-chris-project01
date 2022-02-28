@@ -15,80 +15,88 @@ public class UserInterface {
     private static Bank bank = new Bank();
     private static int nextId = 0; //for customer Id's
 
-    private static void loginState(){
+    private static boolean loginState(){
         boolean login = false;
+        boolean done = false;
         while (!login){
-            System.out.println("Are you a customer, teller, or admin (0, 1, 2)?");
+            System.out.println("Are you a customer, teller, or admin, or exit (0, 1, 2, 3)?");
             try{
                 int response = in.nextInt();
-                if (response > 2 || response < 0){
+                if (response > 3 || response < 0){
                     throw new Exception();
                 }
-                System.out.println("Please enter your userId:");
-                try{
-                    int id = in.nextInt();
-                    System.out.println("Please enter your password:");
+                if (response == 3){
+                    done = true;
+                    login = true;
+                }
+                else{
+                    System.out.println("Please enter your userId:");
                     try{
-                        String password = in.next();
-                        if (response == 0){
-                            try{
-                                Customer customer = bank.customerLogIn(id, password);
-                                if (customer == null){
-                                    throw new Exception();
+                        int id = in.nextInt();
+                        System.out.println("Please enter your password:");
+                        try{
+                            String password = in.next();
+                            if (response == 0){
+                                try{
+                                    Customer customer = bank.customerLogIn(id, password);
+                                    if (customer == null){
+                                        throw new Exception();
+                                    }
+                                    else{
+                                        customerState(customer);
+                                        login = true;
+                                    }
                                 }
-                                else{
-                                    customerState(customer);
-                                    login = true;
+                                catch(Exception e){
+                                    System.out.println("I am sorry, that is not a valid login.");
                                 }
                             }
-                            catch(Exception e){
-                                System.out.println("I am sorry, that is not a valid login.");
+                            else if (response == 1){
+                                try{
+                                    BankTeller teller = bank.tellerLogIn(id, password);
+                                    if (teller == null){
+                                        throw new Exception();
+                                    }
+                                    else{
+                                        tellerState(teller);
+                                        login = true;
+                                    }
+                                }
+                                catch(Exception e){
+                                    System.out.println("I am sorry, that is not a valid login.");
+                                }
+                            }
+                            else{
+                                try{
+                                    BankAdmin admin = bank.adminLogIn(id, password);
+                                    if (admin == null){
+                                        throw new Exception();
+                                    }
+                                    else{
+                                        adminState(admin);
+                                        login = true;
+                                    }
+                                }
+                                catch(Exception e){
+                                    System.out.println("I am sorry, that is not a valid login.");
+                                }
                             }
                         }
-                        else if (response == 1){
-                            try{
-                                BankTeller teller = bank.tellerLogIn(id, password);
-                                if (teller == null){
-                                    throw new Exception();
-                                }
-                                else{
-                                    tellerState(teller);
-                                    login = true;
-                                }
-                            }
-                            catch(Exception e){
-                                System.out.println("I am sorry, that is not a valid login.");
-                            }
+                        catch(Exception e){
+                            System.out.println("That is not a valid password.");
                         }
-                        else{
-                            try{
-                                BankAdmin admin = bank.adminLogIn(id, password);
-                                if (admin == null){
-                                    throw new Exception();
-                                }
-                                else{
-                                    adminState(admin);
-                                    login = true;
-                                }
-                            }
-                            catch(Exception e){
-                                System.out.println("I am sorry, that is not a valid login.");
-                            }
-                        }
+                        
                     }
                     catch(Exception e){
-                        System.out.println("That is not a valid password.");
+                        System.out.println("That is not a valid id.");
                     }
-                    
-                }
-                catch(Exception e){
-                    System.out.println("That is not a valid id.");
                 }
             }
             catch(Exception e){
                 System.out.println("That is not a valid input.");
             }
         }
+        return done;
     }
 
     private static void customerState(Customer customer, int choice){
@@ -365,7 +373,11 @@ public class UserInterface {
         intialTeller.createAccount(intialCustomer, 0, 0, 0, 0);
 
         //go to state to login
-        loginState();
+        boolean done = false;
+        while(!done){
+            done = loginState();
+        }
+        
 
         //close scanner
         in.close();
