@@ -61,5 +61,4 @@ public abstract class AbstractTeller {
      */
     public abstract void transfer(AbstractAccount account, double amount, AbstractAccount transferee) throws InsufficientFundsException;
     
-    
 }

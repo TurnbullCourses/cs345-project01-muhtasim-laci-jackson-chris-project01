@@ -1,5 +1,7 @@
 package edu.ithaca.dturnbull.bank.Teller;
 
+import java.util.List;
+
 import edu.ithaca.dturnbull.bank.Account.AbstractAccount;
 import edu.ithaca.dturnbull.bank.Account.CheckingAccount;
 import edu.ithaca.dturnbull.bank.Account.InsufficientFundsException;
@@ -11,7 +13,6 @@ public class BankTeller extends AbstractTeller {
     public BankTeller(int id, String password){
         this.id = id;
         this.password = password;
-   
 
     }
 
@@ -69,5 +70,7 @@ public class BankTeller extends AbstractTeller {
             throw new IllegalArgumentException("Amount to withdraw is invalid.");
         }
     }
+
+
 
 }

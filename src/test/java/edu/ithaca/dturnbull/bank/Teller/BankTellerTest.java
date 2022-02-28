@@ -1,8 +1,10 @@
 package edu.ithaca.dturnbull.bank.Teller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 //import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -100,4 +102,19 @@ public class BankTellerTest {
         teller.deposit(100.000,bankAccount);
         assertEquals(200, teller.getBalance(bankAccount));
     }
+
+    @Test
+    void isNumberValidTest() {
+        // checks to see if a double has two decimals or less
+        assertTrue(CheckingAccount.isNumberValid(100));
+        assertTrue(CheckingAccount.isNumberValid(100.1));
+        assertTrue(CheckingAccount.isNumberValid(100.11));
+        assertFalse(CheckingAccount.isNumberValid(100.111));
+
+        // amount is a positive number
+        assertTrue(CheckingAccount.isNumberValid(10));
+        assertFalse(CheckingAccount.isNumberValid(-10));
+        assertFalse(CheckingAccount.isNumberValid(-100));
+    }
+
 }
