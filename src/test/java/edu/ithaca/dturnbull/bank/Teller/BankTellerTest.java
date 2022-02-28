@@ -75,5 +75,29 @@ public class BankTellerTest {
                                                                                                   // more than 2
                                                                                                        // decimals
     }
-}
 
+    @Test
+    void depositTest()throws InsufficientFundsException {
+
+        AbstractTeller teller = new BankTeller(1454,"snowday303");
+        AbstractAccount bankAccount = new CheckingAccount(0);
+
+        teller.deposit(100.00,bankAccount);
+        assertEquals(100, teller.getBalance(bankAccount));
+    
+        // Too many decimal places
+        assertThrows(IllegalArgumentException.class, () -> teller.deposit(100.999,bankAccount));
+        assertThrows(IllegalArgumentException.class, () -> teller.deposit(100.001,bankAccount));
+    
+        // Negative values
+        assertThrows(IllegalArgumentException.class, () -> teller.deposit(-100,bankAccount));
+        assertThrows(IllegalArgumentException.class, () -> teller.deposit(-10,bankAccount));
+    
+        // Balance does not change when errors are thrown
+        assertEquals(100, teller.getBalance(bankAccount));
+    
+        // Hanging zeros are not accounted for
+        teller.deposit(100.000,bankAccount);
+        assertEquals(200, teller.getBalance(bankAccount));
+    }
+}
