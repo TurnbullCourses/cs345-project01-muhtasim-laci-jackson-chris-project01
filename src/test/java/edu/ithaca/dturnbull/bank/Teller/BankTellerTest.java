@@ -1,12 +1,15 @@
 package edu.ithaca.dturnbull.bank.Teller;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+//import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import edu.ithaca.dturnbull.bank.Account.AbstractAccount;
+import edu.ithaca.dturnbull.bank.Account.CheckingAccount;
 import edu.ithaca.dturnbull.bank.Account.InsufficientFundsException;
-import edu.ithaca.dturnbull.bank.Teller.BankTeller;
+//import edu.ithaca.dturnbull.bank.Teller.BankTeller;
 
 
 
@@ -24,46 +27,49 @@ public class BankTellerTest {
 
     @Test
     void withdrawTest() throws InsufficientFundsException {
-        BankAccount bankAccount = new BankAccount("a@b.com", 200);
-        bankAccount.withdraw(100);
+        AbstractTeller teller = new BankTeller(1454,"snowday303");
+        AbstractAccount bankAccount = new CheckingAccount(200.0);
+            
+        teller.withdraw(100.0, bankAccount);
         assertEquals(100, bankAccount.getBalance(), 0.001);
 
         // Overdrawn
-        assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(300));
+        assertThrows(InsufficientFundsException.class, () -> teller.withdraw(300,bankAccount));
 
         // Negative number withdrawn
-        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(-100));
+        assertThrows(IllegalArgumentException.class, () -> teller.withdraw(-100,bankAccount));
 
         // Too many decimal places
-        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(100.999));
-        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(100.001));
+        assertThrows(IllegalArgumentException.class, () -> teller.withdraw(100.999,bankAccount));
+        assertThrows(IllegalArgumentException.class, () -> teller.withdraw(100.001,bankAccount));
 
         // Balance does not change when an excepetion is thrown
         assertEquals(100, bankAccount.getBalance());
 
         // Hanging zeros are not accounted for
-        bankAccount.withdraw(100.000);
+        teller.withdraw(100.000,bankAccount);
         assertEquals(0, bankAccount.getBalance());
     }
   
     @Test
     void transferTest() throws InsufficientFundsException {
-        BankTeller bankAccount = new BankTeller("a@b.com", 200);
-        BankTeller newAccount = new BankTeller("new@mail.com", 0);
+        AbstractAccount bankAccount = new CheckingAccount(200);
+        AbstractAccount newAccount = new CheckingAccount(0);
+        AbstractTeller teller = new BankTeller(1454,"snowday303");
 
-        bankAccount.transfer(100, newAccount);
+        teller.transfer(bankAccount,100, newAccount);
 
         assertEquals(100, newAccount.getBalance()); // valid transfer - assures initial account had money withdrawn
                                                     // correctly
         assertEquals(100, bankAccount.getBalance()); // valid transfer - assures transfer account had money added
                                                      // correctly
 
-        assertThrows(InsufficientFundsException.class, () -> bankAccount.transfer(500, newAccount)); // transfer amount
+        assertThrows(InsufficientFundsException.class, () -> teller.transfer(bankAccount,500, newAccount)); // transfer amount
                                                                                                      // is greater than
                                                                                                      // balance - border
                                                                                                      // case <0
 
-        assertThrows(IllegalArgumentException.class, () -> bankAccount.transfer(5.87654, newAccount)); // transfer
+        assertThrows(IllegalArgumentException.class, () -> teller.transfer(bankAccount,5.87654, newAccount)); // transfer
                                                                                                        // amount has
                                                                                                   // more than 2
                                                                                                        // decimals
