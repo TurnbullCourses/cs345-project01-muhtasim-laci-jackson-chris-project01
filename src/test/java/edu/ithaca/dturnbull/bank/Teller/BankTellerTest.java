@@ -34,7 +34,7 @@ public class BankTellerTest {
     
 
     @Test
-    void withdrawAndGetBalanceTest() throws InsufficientFundsException {
+    void withdrawAndGetBalanceTest() throws InsufficientFundsException { 
         AbstractTeller teller = new BankTeller(1454,"snowday303");
         AbstractAccount bankAccount = new CheckingAccount(200.0);
             
