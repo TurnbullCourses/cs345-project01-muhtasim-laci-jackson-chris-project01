@@ -3,26 +3,36 @@
 ## Project 01 - Bank Software
 
 Names:
-<< add 3-4 names here >>
+Chris Weil, Laci Young, Muhtasim Hossain, Jackson Becker
 
 Link to UML Use Case Diagram:
-<< add linkk here >>
+1. - https://drive.google.com/file/d/1YR7iFRCsNJpYXwJkxQKg1nByO2iGP3zU/view?usp=sharing
 
 Link to UML Class Diagram:
-<< add link here >>
+1. - https://drive.google.com/file/d/1M3HjVJGuvxFAXUw-VHSkgHE5aYIsfxNK/view?usp=sharing
+
+Link to Three UML Sequence Diagrams:
+1. - https://drive.google.com/file/d/1axMBmrIVEeI1aQromatMRzf3uKxM-3yz/view
+2. - https://drive.google.com/file/d/1JEtO3Va6-7gzI1q3C54skkdU9BFPt7xP/view?usp=sharing
+3. - https://drive.google.com/file/d/1_s58Z_je0qk6kox_bSZ6mOwSEIFcR3aB/view?usp=sharing
+
+Link to UML State Diagram:
+1. - https://drive.google.com/file/d/10bb04JFydXI5MPZoJ_eTtLWLCOzynTFV/view?usp=sharing
+
 
 Three Use Cases that you will implement first:
-1. -
-2. - 
-3. - 
+1. - Login
+2. - Deposit/Withdraw/Transfer
+3. - Create Account
 
 Which classes & methods do you need to implement for these use cases?
 (Indicated which team member is responsible for the implemenation)
-1. -
-2. -
-3. -
-4. -
-5. << add more as needed >>
+1. - Account Superclass, Subclass, and Customer Class - Jackson
+2. - Bank and Admin Classes, Including admin sequence diagram - Chris
+3. - AbstractTeller and BankTeller classes & createAccount sequence diagram - Laci
+4. - Created Account - Muhtasim
+
+Link to User Test Script: https://docs.google.com/document/d/1z2OVbb1JsH9_xEOb779SKdbPfaU454HaignxMly5AGQ/edit?usp=sharing
 
 Don't forget to use Test-Driven Development (TDD)
 1. Write Class and Method Function Headers
